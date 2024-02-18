@@ -32,6 +32,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', False) == 'True'
 
 ALLOWED_HOSTS = [
+    'task-manager-poject.onrender.com',
     'webserver'
 ]
 
