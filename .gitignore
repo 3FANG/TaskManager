@@ -154,3 +154,6 @@ cython_debug/
 
 # Test files
 test.py
+
+# Bootstrap examples 
+bootstrap-5.3.3-examples/

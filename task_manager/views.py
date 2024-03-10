@@ -1,5 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
+from django.views import View
 
 
-def index(request, *args, **kwargs):
-    return HttpResponse('Hello, world!')
+class HomePageView(View):
+    """Класс-представление для домашней страницы."""
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'base.html')

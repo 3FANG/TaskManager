@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+{% load django_bootstrap5 %}
+{% load static %}
+{% load i18n %}
+
+<html lang="en">
+<head>
+    <!-- Скрипт для смены темы -->
+    <script src="{% static 'js/color-modes.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% translate 'Task Manager' %}</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- svg иконки -->
+    {% include 'svg/theme_icons.html' %}
+    {% include 'svg/social_icons.html' %}
+    <!-- Кнопка с меню выбором цвета темы -->
+    {% include 'theme_select.html' %}
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a href="/" class="navbar-brand">{% translate 'Task Manager' %}</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">{% translate 'Users' %}</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-outline-primary me-2">{% translate 'Login' %}</button>
+                    <button type="button" class="btn btn-primary">{% translate 'Sign-up' %}</button> 
+                </div>     
+            </div>
+        </div>
+    </nav>
+
+    <main class="container flex-grow-1">
+        <div class="card mt-4">
+            <div class="card-body p-5 bg-body-tertiary">
+                <h5 class="card-title display-4 mb-0">{% translate 'Hello from Hexlet!' %}</h5>
+                <p class="card-text lead">{% translate 'Practical programming courses' %}</p>
+                <hr>
+                <button class="btn btn-primary btn-lg">{% translate 'Learn more' %}</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="container">
+        <footer class="d-flex justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+          </div>
+
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+          </ul>
+        </footer>
+    </div>
+
+</body>
+</html>
