@@ -157,3 +157,7 @@ test.py
 
 # Bootstrap examples 
 bootstrap-5.3.3-examples/
+
+# All staticfiles collected by $ python3 manage.py collectstatic
+/static
+/staticfiles

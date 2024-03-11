@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
+    '127.0.0.1',
     'task-manager-poject.onrender.com',
     'webserver'
 ]
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'task_manager',
@@ -134,7 +135,11 @@ STATIC_URL = '/static/'
 
 if not DEBUG:
     STATIC_ROOT = BASE_DIR / 'static'
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 else:
     STATICFILES_DIRS = [
         BASE_DIR / 'static'
@@ -158,4 +163,18 @@ BOOTSTRAP5 = {
         "crossorigin": "anonymous",
     },
     "theme_url": '/static/css/header.css',
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
 }
