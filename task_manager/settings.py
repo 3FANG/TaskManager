@@ -132,18 +132,13 @@ LOCALE_PATHS = [
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-if not DEBUG:
-    STATIC_ROOT = BASE_DIR / 'static'
-    STORAGES = {
+STATIC_ROOT = BASE_DIR / 'static'
+STORAGES = {
         "staticfiles": {
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
     }
-else:
-    STATICFILES_DIRS = [
-        BASE_DIR / 'static'
-    ]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
