@@ -153,7 +153,7 @@ dmypy.json
 cython_debug/
 
 # Test files
-test.py
+test.*
 
 # Bootstrap examples 
 bootstrap-5.3.3-examples/

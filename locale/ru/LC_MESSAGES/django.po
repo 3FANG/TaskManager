@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 09:14+0300\n"
+"POT-Creation-Date: 2024-03-30 14:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,30 +19,130 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: task_manager/users/tests.py:59 task_manager/users/views.py:64
+msgid "You have been successfully signed in."
+msgstr "Вы успешно зарегистрированы."
+
+#: task_manager/users/tests.py:93 task_manager/users/tests.py:105
+#: task_manager/users/views.py:38
+msgid "You don't have permissions to modify another user."
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: task_manager/users/views.py:37
+#, fuzzy
+#| msgid "You have been successfully signed in."
+msgid "The user data has been successfully changed."
+msgstr "Данные пользователя были успешно изменены."
+
+#: task_manager/users/views.py:49
+#, fuzzy
+#| msgid "You have successfully logged in."
+msgid "User successfully deleted."
+msgstr "Пользователь успешно удален"
+
+#: task_manager/users/views.py:50
+msgid "You do not have permissions to delete another user."
+msgstr "У вас нет прав для удаления другого пользователя."
+
+#: task_manager/views.py:24
+msgid "You have successfully logged in."
+msgstr "Вы успешно авторизовались."
+
+#: task_manager/views.py:39
+msgid "You've logged out of your account."
+msgstr "Вы вышли из аккаунта."
+
 #: templates/base.html:13 templates/base.html:26
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
-#: templates/base.html:34
+#: templates/base.html:34 templates/users/index.html:8
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/base.html:38
+#: templates/base.html:41 templates/logout.html:9
+msgid "Logout"
+msgstr "Выход"
+
+#: templates/base.html:44 templates/login.html:9
 msgid "Login"
 msgstr "Вход"
 
-#: templates/base.html:39
+#: templates/base.html:45
 msgid "Sign-up"
 msgstr "Регистрация"
 
-#: templates/base.html:48
+#: templates/base.html:58
 msgid "Hello from Hexlet!"
 msgstr "Привет от Хекслета!"
 
-#: templates/base.html:49
+#: templates/base.html:59
 msgid "Practical programming courses"
 msgstr "Практические курсы по программированию"
 
-#: templates/base.html:51
+#: templates/base.html:61
 msgid "Learn more"
 msgstr "Узнать больше"
+
+#: templates/login.html:14
+msgid "Enter"
+msgstr "Войти"
+
+#: templates/logout.html:14
+msgid "Exit"
+msgstr "Выйти"
+
+#: templates/users/delete.html:8
+msgid "Delete User"
+msgstr "Удалить пользователя"
+
+#: templates/users/delete.html:11
+#, python-format
+msgid "Are you sure you want to delete %(first_name)s %(last_name)s?"
+msgstr ""
+"Вы уверены, что хотите удалить пользователя %(first_name)s %(last_name)s?"
+
+#: templates/users/delete.html:14
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: templates/users/index.html:13
+#, fuzzy
+#| msgid "Users"
+msgid "Username"
+msgstr "Пользователи"
+
+#: templates/users/index.html:14
+msgid "Fullname"
+msgstr "Полное имя"
+
+#: templates/users/index.html:15
+msgid "Date of joining"
+msgstr "Дата регистрации"
+
+#: templates/users/index.html:27
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/users/index.html:29
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/users/signup.html:8
+msgid "Registration"
+msgstr "Регистрация"
+
+#: templates/users/signup.html:12
+#, fuzzy
+#| msgid "Sign-up"
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: templates/users/update.html:8
+msgid "Changing user information"
+msgstr "Изменение пользователя"
+
+#: templates/users/update.html:12
+msgid "Change"
+msgstr "Изменить"

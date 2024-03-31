@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+<main class="container flex-grow-1">
+    <h1 class="my-4">{% translate 'Logout' %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- How it's works? -->
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-primary" value="{% translate 'Exit' %}">
+    </form>
+</main>
+{% endblock %}
