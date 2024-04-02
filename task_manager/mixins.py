@@ -1,13 +1,25 @@
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 
 from task_manager.settings import DANGER
+        
+
+class PleaseLoginMixin(LoginRequiredMixin):
+    """Тот же LoginRequiredMixin, но добавляет сообщение."""
+
+    error_message = _("You are not logged in! Please log in.") # Вы не авторизованы! Пожалуйста, выполните вход.
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.add_message(request, DANGER, self.error_message)
+        return super().dispatch(request, *args, **kwargs)
 
 
-class OwnerTestMixin(LoginRequiredMixin, UserPassesTestMixin):
+class OwnerTestMixin(PleaseLoginMixin, UserPassesTestMixin):
     """Миксин, проверяющий, является ли пользователь владельцем аккаунта.
 
     Также проверяет, аутентифицирован ли пользователь,

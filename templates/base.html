@@ -33,6 +33,11 @@
                     <li class="nav-item">
                         <a href="{% url 'all_users' %}" class="nav-link">{% translate 'Users' %}</a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'all_statuses' %}" class="nav-link">{% translate 'Statuses' %}</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <div class="d-flex">
                     {% if request.user.is_authenticated %}

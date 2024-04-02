@@ -11,11 +11,20 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.messages import get_messages
 
 from task_manager.users.forms import UserRegisterForm
-from task_manager.users.mixins import OwnerTestMixin
+from task_manager.mixins import OwnerTestMixin
 # from task_manager.users.forms import DeleteUserForm
 
 
 User = get_user_model()
+
+
+class RegisterUserView(SuccessMessageMixin, CreateView):
+    """Класс-представление для регистрации пользователя."""
+
+    form_class = UserRegisterForm
+    template_name = 'users/signup.html'
+    success_url = reverse_lazy('login_user')
+    success_message = _("You have been successfully signed in.") # 'Вы успешно зарегистрированы.'
 
 
 class GetUsersView(ListView):
@@ -54,11 +63,3 @@ class UserDeleteView(OwnerTestMixin, SuccessMessageMixin, DeleteView):
     #     kwargs["request"] = self.request
     #     return kwargs
 
-
-class RegisterUserView(SuccessMessageMixin, CreateView):
-    """Класс-представление для регистрации пользователя."""
-
-    form_class = UserRegisterForm
-    template_name = 'users/signup.html'
-    success_url = reverse_lazy('login_user')
-    success_message = _("You have been successfully signed in.") # 'Вы успешно зарегистрированы.'

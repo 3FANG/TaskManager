@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-30 14:56+0300\n"
+"POT-Creation-Date: 2024-04-01 18:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,30 +19,53 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/users/tests.py:59 task_manager/users/views.py:64
+#: task_manager/mixins.py:14 task_manager/statuses/tests.py:29
+#: task_manager/statuses/tests.py:32 task_manager/statuses/tests.py:59
+#: task_manager/statuses/tests.py:91 task_manager/statuses/tests.py:134
+msgid "You are not logged in! Please log in."
+msgstr "Вы не вошли в систему! Пожалуйста, войдите в систему."
+
+#: task_manager/statuses/models.py:7
+msgid "name"
+msgstr "Имя"
+
+#: task_manager/statuses/models.py:8
+msgid "date created"
+msgstr "Дата создания"
+
+#: task_manager/statuses/tests.py:42 task_manager/statuses/views.py:26
+msgid "Status successfully created."
+msgstr "Статус успешно создан."
+
+#: task_manager/statuses/tests.py:106 task_manager/statuses/views.py:46
+msgid "Status has been successfully changed."
+msgstr "Статус был успешно изменен."
+
+#: task_manager/statuses/tests.py:146 task_manager/statuses/views.py:57
+msgid "Status has been successfully deleted."
+msgstr "Статус успешно удален."
+
+#: task_manager/users/tests.py:31 task_manager/users/views.py:27
 msgid "You have been successfully signed in."
 msgstr "Вы успешно зарегистрированы."
 
-#: task_manager/users/tests.py:93 task_manager/users/tests.py:105
-#: task_manager/users/views.py:38
+#: task_manager/users/tests.py:90 task_manager/users/tests.py:102
+#: task_manager/users/views.py:47
 msgid "You don't have permissions to modify another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:37
-#, fuzzy
-#| msgid "You have been successfully signed in."
+#: task_manager/users/tests.py:119 task_manager/users/views.py:46
 msgid "The user data has been successfully changed."
 msgstr "Данные пользователя были успешно изменены."
 
-#: task_manager/users/views.py:49
-#, fuzzy
-#| msgid "You have successfully logged in."
-msgid "User successfully deleted."
-msgstr "Пользователь успешно удален"
-
-#: task_manager/users/views.py:50
+#: task_manager/users/tests.py:152 task_manager/users/tests.py:159
+#: task_manager/users/views.py:59
 msgid "You do not have permissions to delete another user."
 msgstr "У вас нет прав для удаления другого пользователя."
+
+#: task_manager/users/tests.py:171 task_manager/users/views.py:58
+msgid "User successfully deleted."
+msgstr "Пользователь успешно удален"
 
 #: task_manager/views.py:24
 msgid "You have successfully logged in."
@@ -61,27 +83,31 @@ msgstr "Менеджер задач"
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/base.html:41 templates/logout.html:9
+#: templates/base.html:38 templates/statuses/index.html:8
+msgid "Statuses"
+msgstr "Статусы"
+
+#: templates/base.html:46 templates/logout.html:9
 msgid "Logout"
 msgstr "Выход"
 
-#: templates/base.html:44 templates/login.html:9
+#: templates/base.html:49 templates/login.html:9
 msgid "Login"
 msgstr "Вход"
 
-#: templates/base.html:45
+#: templates/base.html:50
 msgid "Sign-up"
 msgstr "Регистрация"
 
-#: templates/base.html:58
+#: templates/base.html:63
 msgid "Hello from Hexlet!"
 msgstr "Привет от Хекслета!"
 
-#: templates/base.html:59
+#: templates/base.html:64
 msgid "Practical programming courses"
 msgstr "Практические курсы по программированию"
 
-#: templates/base.html:61
+#: templates/base.html:66
 msgid "Learn more"
 msgstr "Узнать больше"
 
@@ -93,23 +119,61 @@ msgstr "Войти"
 msgid "Exit"
 msgstr "Выйти"
 
+#: templates/statuses/create.html:8 templates/statuses/index.html:9
+msgid "Create status"
+msgstr "Создать статус"
+
+#: templates/statuses/create.html:12
+msgid "Create"
+msgstr "Создать"
+
+#: templates/statuses/delete.html:8
+msgid "Delete status"
+msgstr "Удалить статус"
+
+#: templates/statuses/delete.html:11
+msgid "Are you sure you want to delete %(status)s?"
+msgstr ""
+"Вы уверены, что хотите удалить статус %(status)s?"
+
+#: templates/statuses/delete.html:13 templates/users/delete.html:14
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: templates/statuses/index.html:14
+msgid "Status name"
+msgstr "Имя"
+
+#: templates/statuses/index.html:15
+msgid "Date of creating"
+msgstr "Дата создания"
+
+#: templates/statuses/index.html:26 templates/users/index.html:27
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/statuses/index.html:28 templates/users/index.html:29
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/statuses/update.html:8
+msgid "Changing status"
+msgstr "Изменить статус"
+
+#: templates/statuses/update.html:12 templates/users/update.html:12
+msgid "Change"
+msgstr "Изменить"
+
 #: templates/users/delete.html:8
 msgid "Delete User"
 msgstr "Удалить пользователя"
 
 #: templates/users/delete.html:11
-#, python-format
 msgid "Are you sure you want to delete %(first_name)s %(last_name)s?"
 msgstr ""
 "Вы уверены, что хотите удалить пользователя %(first_name)s %(last_name)s?"
 
-#: templates/users/delete.html:14
-msgid "Yes, delete"
-msgstr "Да, удалить"
-
 #: templates/users/index.html:13
-#, fuzzy
-#| msgid "Users"
 msgid "Username"
 msgstr "Пользователи"
 
@@ -121,28 +185,14 @@ msgstr "Полное имя"
 msgid "Date of joining"
 msgstr "Дата регистрации"
 
-#: templates/users/index.html:27
-msgid "Edit"
-msgstr "Изменить"
-
-#: templates/users/index.html:29
-msgid "Delete"
-msgstr "Удалить"
-
 #: templates/users/signup.html:8
 msgid "Registration"
 msgstr "Регистрация"
 
 #: templates/users/signup.html:12
-#, fuzzy
-#| msgid "Sign-up"
 msgid "Sign up"
 msgstr "Регистрация"
 
 #: templates/users/update.html:8
 msgid "Changing user information"
 msgstr "Изменение пользователя"
-
-#: templates/users/update.html:12
-msgid "Change"
-msgstr "Изменить"

@@ -4,16 +4,11 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User as source_user
 from django.utils.translation import gettext_lazy as _
-from django.contrib.messages import get_messages
+
+from task_manager.utils import get_message_text
 
 
 User = get_user_model()
-
-
-def get_message_text(response) -> str:
-    """Получить текст сообщения."""
-    messages = list(get_messages(response.wsgi_request))
-    return str(messages[0])
 
 
 class TestCreateUser(TestCase):
@@ -39,7 +34,7 @@ class TestCreateUser(TestCase):
 class TestReadUser(TestCase):
     """Тестирование просмотра пользователей."""
 
-    def test_static_page(self):
+    def test_users_page(self):
         """Страницы доступны по URL."""
         pages = (reverse('home'), reverse('all_users'))
         for page in pages:
@@ -65,6 +60,7 @@ class TestUpdateUser(TestCase):
     """Тестирование изменения данных пользователя."""
 
     def setUp(self) -> None:
+        """Создаем двух тестовых пользователей."""
         self.test_user_1 = User.objects.create_user(
             username='1ONE',
             password='K3GauRS1'
