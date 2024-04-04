@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<main class="container flex-grow-1">
+    <h1 class="my-4">{% translate 'Tasks' %}</h1>
+    <a href="{% url 'create_task' %}" class="btn btn-primary mb-3" role="button">{% translate 'Create task' %}</a>
+
+    <div class="card mb-3">
+        <div class="card-body bg-light">
+           <form method="get">
+                {% bootstrap_form form %}
+                <button type="submit" class="btn btn-primary">{% translate 'Show' %}</button>
+            </form> 
+        </div>
+    </div>
+    
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>{% translate 'Task name' %}</th>
+                <th>{% translate 'Status' %}</th>
+                <th>{% translate 'Author' %}</th>
+                <th>{% translate 'Executor' %}</th>
+                <th>{% translate 'Date of creating' %}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks_list %}
+            <tr class="align-baseline">
+                <td>{{ task.id }}</td>
+                <td><a href="{% url 'show_task' task.id %}">{{ task.name }}</a></td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.author }}</td>
+                <td>{{ task.executor|default_if_none:""}}</td>
+                <td>{{ task.date_created }}</td>
+                <td>
+                    <a href="{% url 'update_task' task.id %}">{% translate 'Edit' %}</a>
+                    <br>
+                    <a href="{% url 'delete_task' task.id %}">{% translate 'Delete' %}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

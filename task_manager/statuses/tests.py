@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from task_manager.statuses.models import Statuses
+from task_manager.tasks.models import Tasks
 from task_manager.utils import get_message_text
 
 
@@ -110,16 +111,18 @@ class TestUpdateStatus(TestCase):
 class TestDeleteStatus(TestCase):
     """Тестирование удаления статуса."""
 
-    ################################################################################################
-    ### Статус нельзя удалить, если он связан хотя бы с одной задачей (сущность следующего шага) ###
-    ################################################################################################
-
     def setUp(self):
         """Создаем тестовые статусы и пользователя."""
         self.status_1 = Statuses.objects.create(name='status_1')
         self.status_2 = Statuses.objects.create(name='status_2')
         self.user = User.objects.create_user(username='auth')
-
+        self.task_1 = Tasks.objects.create(
+            name="Task",
+            description="Description",
+            status=self.status_1,
+            executor=self.user,
+            author=self.user
+        )
 
     def test_delete_by_unauthorized_user(self):
         """Попытка удаления статуса неавторизованным пользователем."""
@@ -133,8 +136,18 @@ class TestDeleteStatus(TestCase):
                 self.assertRedirects(response, expected_url=redirect_url)
                 self.assertEqual(get_message_text(response), _("You are not logged in! Please log in.")) # Вы не авторизованы! Пожалуйста, выполните вход.
 
+    def test_delete_by_authorized_user_with_protected_instance(self):
+        """Удаление статуса, связанного с задачами, авторизованным пользователем."""
+        route = reverse('delete_status', args=[self.status_1.id])
+        self.client.force_login(user=self.user)
+        response = self.client.get(route)
+        self.assertTemplateUsed(response, 'statuses/delete.html')
+        response = self.client.post(route, follow=True)
+        self.assertRedirects(response, reverse('all_statuses'))
+        self.assertEqual(get_message_text(response), _("You can't delete a status because it's associated with tasks."))
+                
     def test_delete_by_authorized_user(self):
-        """Удаление статуса авторизованным пользователем."""
+        """Удаление статуса, не связанного с задачами, авторизованным пользователем."""
         statuses_count = Statuses.objects.count()
         route = reverse('delete_status', args=[self.status_2.id])
         self.client.force_login(user=self.user)
@@ -145,3 +158,4 @@ class TestDeleteStatus(TestCase):
         self.assertEqual(Statuses.objects.count(), statuses_count - 1)
         self.assertEqual(get_message_text(response), _("Status has been successfully deleted."))
                 
+

@@ -12,7 +12,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
 
 from task_manager.statuses.models import Statuses
-from task_manager.mixins import PleaseLoginMixin
+from task_manager.mixins import PleaseLoginMixin, ProtectedInstanceDeleteMixin
 from task_manager.settings import DANGER
 
 
@@ -23,10 +23,10 @@ class CreateStatusView(PleaseLoginMixin, SuccessMessageMixin, CreateView):
     fields = ["name"]
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('all_statuses')
-    success_message = _("Status successfully created.") # Статус успешно создан.
+    success_message = _("Status successfully created.")
 
 
-class GetStatusesView(PleaseLoginMixin, ListView):
+class IndexStatusesView(PleaseLoginMixin, ListView):
     """Класс-представление, выводящий все статусы."""
 
     model = Statuses
@@ -43,10 +43,10 @@ class UpdateStatusView(PleaseLoginMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('all_statuses')
     template_name = 'statuses/update.html'
     context_object_name = 'status'
-    success_message = _("Status has been successfully changed.") # Статус успешно обновлен.
+    success_message = _("Status has been successfully changed.")
 
 
-class DeleteStatusView(PleaseLoginMixin, SuccessMessageMixin, DeleteView):
+class DeleteStatusView(PleaseLoginMixin, SuccessMessageMixin, ProtectedInstanceDeleteMixin, DeleteView):
     """Класс-представление для удаления статуса."""
 
     model = Statuses
@@ -54,4 +54,6 @@ class DeleteStatusView(PleaseLoginMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('all_statuses')
     template_name = 'statuses/delete.html'
     context_object_name = 'status'
-    success_message = _("Status has been successfully deleted.") # Статус успешно удален.
+    success_message = _("Status has been successfully deleted.")
+    protected_instance_redirect = reverse_lazy("all_statuses")
+    protected_instance_error_message = _("You can't delete a status because it's associated with tasks.")

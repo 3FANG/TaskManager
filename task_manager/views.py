@@ -24,6 +24,9 @@ class LoginUserView(SuccessMessageMixin, LoginView):
     success_message = _("You have successfully logged in.") # "Вы успешно авторизовались."
 
 
+#################################################
+# А если неавторизованный пользователь выйдет ? #
+#################################################
 class LogoutUserView(LogoutView):
     """Класс-представление для выхода пользователя."""
 
