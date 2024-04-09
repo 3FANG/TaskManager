@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-04 15:17+0300\n"
+"POT-Creation-Date: 2024-04-08 14:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,47 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/mixins.py:18 task_manager/statuses/tests.py:29
-#: task_manager/statuses/tests.py:32 task_manager/statuses/tests.py:59
-#: task_manager/statuses/tests.py:91 task_manager/statuses/tests.py:134
-#: task_manager/tasks/tests.py:82 task_manager/tasks/tests.py:85
-#: task_manager/tasks/tests.py:111 task_manager/tasks/tests.py:114
-#: task_manager/tasks/tests.py:146 task_manager/tasks/tests.py:149
-#: task_manager/tasks/tests.py:175 task_manager/tasks/tests.py:178
+#: task_manager/labels/models.py:6 task_manager/statuses/models.py:7
+#: task_manager/tasks/models.py:13
+msgid "name"
+msgstr "Имя"
+
+#: task_manager/labels/models.py:7 task_manager/statuses/models.py:8
+#: task_manager/tasks/models.py:19
+msgid "date created"
+msgstr "Дата создания"
+
+#: task_manager/labels/tests.py:48 task_manager/labels/tests.py:51
+#: task_manager/labels/tests.py:74 task_manager/labels/tests.py:100
+#: task_manager/labels/tests.py:131 task_manager/mixins.py:18
+#: task_manager/statuses/tests.py:30 task_manager/statuses/tests.py:33
+#: task_manager/statuses/tests.py:60 task_manager/statuses/tests.py:92
+#: task_manager/statuses/tests.py:137 task_manager/tasks/tests.py:82
+#: task_manager/tasks/tests.py:85 task_manager/tasks/tests.py:111
+#: task_manager/tasks/tests.py:114 task_manager/tasks/tests.py:146
+#: task_manager/tasks/tests.py:149 task_manager/tasks/tests.py:175
+#: task_manager/tasks/tests.py:178
 msgid "You are not logged in! Please log in."
 msgstr "Вы не вошли в систему! Пожалуйста, войдите в систему."
 
-#: task_manager/mixins.py:37 task_manager/users/tests.py:162
-#: task_manager/users/tests.py:169
+#: task_manager/labels/tests.py:62 task_manager/labels/views.py:20
+msgid "Label successfully created."
+msgstr "Метка успешно создана."
+
+#: task_manager/labels/tests.py:115 task_manager/labels/views.py:39
+msgid "Label has been successfully changed."
+msgstr "Метка была успешно изменена."
+
+#: task_manager/labels/tests.py:143 task_manager/labels/views.py:53
+msgid "You can't delete a label because it's associated with tasks."
+msgstr "Вы не можете удалить метку, потому что она связана с задачами."
+
+#: task_manager/labels/tests.py:155 task_manager/labels/views.py:50
+msgid "The label has been successfully removed."
+msgstr "Метка была успешно создана."
+
+#: task_manager/mixins.py:37 task_manager/users/tests.py:166
+#: task_manager/users/tests.py:173
 msgid "You do not have permissions to delete another user."
 msgstr "У вас нет прав для удаления другого пользователя."
 
@@ -38,86 +67,94 @@ msgstr "У вас нет прав для удаления другого пол�
 msgid "Error message for deleting a linked entity."
 msgstr "Сообщение об ошибке удаления связанной сущности."
 
-#: task_manager/statuses/models.py:7 task_manager/tasks/models.py:12
-msgid "name"
-msgstr "Имя"
-
-#: task_manager/statuses/models.py:8 task_manager/tasks/models.py:17
-msgid "date created"
-msgstr "Дата создания"
-
-#: task_manager/statuses/tests.py:42 task_manager/statuses/views.py:26
+#: task_manager/statuses/tests.py:43 task_manager/statuses/views.py:26
 msgid "Status successfully created."
 msgstr "Статус успешно создан."
 
-#: task_manager/statuses/tests.py:106 task_manager/statuses/views.py:46
+#: task_manager/statuses/tests.py:107 task_manager/statuses/views.py:45
 msgid "Status has been successfully changed."
 msgstr "Статус был успешно изменен."
 
-#: task_manager/statuses/tests.py:146 task_manager/statuses/views.py:57
-msgid "Status has been successfully deleted."
-msgstr "Статус успешно удален."
-
-#: task_manager/statuses/views.py:59
+#: task_manager/statuses/tests.py:147 task_manager/statuses/views.py:58
 msgid "You can't delete a status because it's associated with tasks."
 msgstr "Вы не можете удалить статус, потому что он связан с задачами."
 
-#: task_manager/tasks/models.py:13
+#: task_manager/statuses/tests.py:159 task_manager/statuses/views.py:56
+msgid "Status has been successfully deleted."
+msgstr "Статус успешно удален."
+
+#: task_manager/tasks/forms.py:14
+msgid "Press CTRL to select multiple labels."
+msgstr "Зажмите CTRL для выбора нескольких меток."
+
+#: task_manager/tasks/models.py:14
 msgid "description"
 msgstr "Описание"
 
-#: task_manager/tasks/models.py:14
+#: task_manager/tasks/models.py:15
 msgid "statuses"
 msgstr "Статусы"
 
-#: task_manager/tasks/models.py:15
+#: task_manager/tasks/models.py:16
 msgid "executor"
 msgstr "Исполнитель"
 
-#: task_manager/tasks/models.py:16
+#: task_manager/tasks/models.py:17
 msgid "author"
 msgstr "Автор"
 
-#: task_manager/tasks/models.py:16
+#: task_manager/tasks/models.py:17
 msgid "user_tasks"
 msgstr "Задачи"
 
-#: task_manager/tasks/tests.py:99 task_manager/tasks/views.py:62
+#: task_manager/tasks/models.py:18
+msgid "labels"
+msgstr "Метки"
+
+#: task_manager/tasks/models.py:31
+msgid "task"
+msgstr "Задача"
+
+#: task_manager/tasks/models.py:32
+msgid "label"
+msgstr "Метка"
+
+#: task_manager/tasks/tests.py:99 task_manager/tasks/views.py:67
 msgid "The task has been successfully created."
 msgstr "Задача была успешно создана."
 
-#: task_manager/tasks/tests.py:163 task_manager/tasks/views.py:77
+#: task_manager/tasks/tests.py:163 task_manager/tasks/views.py:84
 msgid "The task has been successfully updated."
 msgstr "Задача была успешно обновлена."
 
-#: task_manager/tasks/tests.py:192 task_manager/tasks/views.py:89
+#: task_manager/tasks/tests.py:192 task_manager/tasks/views.py:96
 msgid "The task has been successfully deleted."
 msgstr "Задача была успешно удалена."
 
-#: task_manager/tasks/views.py:91
+#: task_manager/tasks/views.py:98
 msgid "A task can only be deleted by its author."
 msgstr "Задача может быть удалена только его автором."
 
-#: task_manager/users/tests.py:32 task_manager/users/views.py:24
+#: task_manager/users/tests.py:33 task_manager/users/views.py:23
 msgid "You have been successfully signed in."
 msgstr "Вы успешно зарегистрированы."
 
-#: task_manager/users/tests.py:91 task_manager/users/tests.py:103
-#: task_manager/users/views.py:44
+#: task_manager/users/tests.py:92 task_manager/users/tests.py:104
+#: task_manager/users/views.py:43
 msgid "You don't have permissions to modify another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/tests.py:120 task_manager/users/views.py:43
+#: task_manager/users/tests.py:121 task_manager/users/views.py:42
 msgid "The user data has been successfully changed."
 msgstr "Данные пользователя были успешно изменены."
 
-#: task_manager/users/tests.py:181 task_manager/users/views.py:58
-msgid "User successfully deleted."
-msgstr "Пользователь успешно удален"
-
-#: task_manager/users/views.py:59
+#: task_manager/users/tests.py:185 task_manager/users/views.py:58
 msgid "You can't delete a user because they are associated with tasks."
 msgstr "Вы не можете удалить пользователя, потому что он связан с задачами."
+
+#: task_manager/users/tests.py:197 task_manager/users/views.py:57
+msgid "User successfully deleted."
+msgstr "Пользователь успешно удален"
 
 #: task_manager/views.py:24
 msgid "You have successfully logged in."
@@ -143,29 +180,85 @@ msgstr "Статусы"
 msgid "Tasks"
 msgstr "Задачи"
 
-#: templates/base.html:49 templates/logout.html:9
+#: templates/base.html:44 templates/labels/index.html:8
+msgid "Labels"
+msgstr "Метки"
+
+#: templates/base.html:52 templates/logout.html:9
 msgid "Logout"
 msgstr "Выход"
 
-#: templates/base.html:52 templates/login.html:9
+#: templates/base.html:55 templates/login.html:9
 msgid "Login"
 msgstr "Вход"
 
-#: templates/base.html:53
+#: templates/base.html:56
 msgid "Sign-up"
 msgstr "Регистрация"
 
-#: templates/base.html:66
+#: templates/base.html:69
 msgid "Hello from Hexlet!"
 msgstr "Привет от Хекслета!"
 
-#: templates/base.html:67
+#: templates/base.html:70
 msgid "Practical programming courses"
 msgstr "Практические курсы по программированию"
 
-#: templates/base.html:69
+#: templates/base.html:72
 msgid "Learn more"
 msgstr "Узнать больше"
+
+#: templates/labels/create.html:8 templates/labels/index.html:9
+msgid "Create label"
+msgstr "Создать метку"
+
+#: templates/labels/create.html:12 templates/statuses/create.html:12
+#: templates/tasks/create.html:12
+msgid "Create"
+msgstr "Создать"
+
+#: templates/labels/delete.html:8
+msgid "Delete label"
+msgstr "Удалить метку"
+
+#: templates/labels/delete.html:11
+msgid "Are you sure you want to delete \"%(label)s\"?"
+msgstr "Вы уверены, что хотите удалить метку \"%(label)s\"?"
+
+#: templates/labels/delete.html:13 templates/statuses/delete.html:13
+#: templates/tasks/delete.html:13 templates/users/delete.html:14
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: templates/labels/index.html:14
+msgid "Label name"
+msgstr "Имя"
+
+#: templates/labels/index.html:15 templates/statuses/index.html:15
+#: templates/tasks/index.html:29 templates/tasks/show.html:28
+msgid "Date of creating"
+msgstr "Дата создания"
+
+#: templates/labels/index.html:26 templates/statuses/index.html:26
+#: templates/tasks/index.html:43 templates/tasks/show.html:42
+#: templates/users/index.html:27
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/labels/index.html:28 templates/statuses/index.html:28
+#: templates/tasks/index.html:45 templates/tasks/show.html:44
+#: templates/users/index.html:29
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/labels/update.html:8
+msgid "Changing label"
+msgstr "Изменение метки"
+
+#: templates/labels/update.html:12 templates/statuses/update.html:12
+#: templates/tasks/update.html:12 templates/users/update.html:12
+msgid "Change"
+msgstr "Изменить"
 
 #: templates/login.html:14
 msgid "Enter"
@@ -179,50 +272,22 @@ msgstr "Выйти"
 msgid "Create status"
 msgstr "Создать статус"
 
-#: templates/statuses/create.html:12 templates/tasks/create.html:12
-msgid "Create"
-msgstr "Создать"
-
 #: templates/statuses/delete.html:8
 msgid "Delete status"
 msgstr "Удалить статус"
 
 #: templates/statuses/delete.html:11
+#, python-format
 msgid "Are you sure you want to delete \"%(status)s\"?"
 msgstr "Вы уверены, что хотите удалить статус \"%(status)s\"?"
-
-#: templates/statuses/delete.html:13 templates/tasks/delete.html:13
-#: templates/users/delete.html:14
-msgid "Yes, delete"
-msgstr "Да, удалить"
 
 #: templates/statuses/index.html:14
 msgid "Status name"
 msgstr "Имя"
 
-#: templates/statuses/index.html:15 templates/tasks/index.html:29
-#: templates/tasks/show.html:28
-msgid "Date of creating"
-msgstr "Дата создания"
-
-#: templates/statuses/index.html:26 templates/tasks/index.html:43
-#: templates/tasks/show.html:32 templates/users/index.html:27
-msgid "Edit"
-msgstr "Изменить"
-
-#: templates/statuses/index.html:28 templates/tasks/index.html:45
-#: templates/tasks/show.html:34 templates/users/index.html:29
-msgid "Delete"
-msgstr "Удалить"
-
 #: templates/statuses/update.html:8
 msgid "Changing status"
 msgstr "Изменить статус"
-
-#: templates/statuses/update.html:12 templates/tasks/update.html:12
-#: templates/users/update.html:12
-msgid "Change"
-msgstr "Изменить"
 
 #: templates/tasks/create.html:8 templates/tasks/index.html:9
 msgid "Create task"
@@ -260,6 +325,10 @@ msgstr "Исполнитель"
 #: templates/tasks/show.html:8
 msgid "Viewing a task"
 msgstr "Просмотр задачи"
+
+#: templates/tasks/show.html:33
+msgid "Lables"
+msgstr "Метки"
 
 #: templates/tasks/update.html:8
 msgid "Changing task"

@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 
 from task_manager.tasks.models import Tasks
 from task_manager.tasks.forms import TaskCreationForm, FilterTasksForm
-from task_manager.mixins import PleaseLoginMixin, OwnerTestMixin
+from task_manager.mixins import PleaseLoginMixin, OwnerTestMixin, ProtectedInstanceDeleteMixin
 
 
 class IndexTasksView(PleaseLoginMixin, FormMixin, ListView):
@@ -29,10 +29,15 @@ class IndexTasksView(PleaseLoginMixin, FormMixin, ListView):
         queryset = self.model._default_manager.all()
         status = self.request.GET.get('status')
         executor = self.request.GET.get('executor')
+        labels = self.request.GET.get('labels')
+
         if status:
             queryset = queryset.filter(status__id=status)
         if executor:
             queryset = queryset.filter(executor__id=executor)
+        if labels:
+            queryset = queryset.filter(labels__id=labels)
+
         return queryset
     
     def get_initial(self):
@@ -62,6 +67,7 @@ class CreateTaskView(PleaseLoginMixin, SuccessMessageMixin, CreateView):
     success_message = _("The task has been successfully created.")
 
     def form_valid(self, form):
+        """Автоматически присваиваем создаваемой задаче владельца."""
         form.instance.author = self.request.user
         return super().form_valid(form)
 
@@ -70,8 +76,9 @@ class UpdateTaskView(PleaseLoginMixin, SuccessMessageMixin, UpdateView):
     """Класс-представление для обновления задачи."""
 
     model = Tasks
+    # fields = ["name", "description", "status", "executor", "labels"]
+    form_class = TaskCreationForm
     pk_url_kwarg = 'task_id'
-    fields = ["name", "description", "status", "executor"]
     template_name = 'tasks/update.html'
     context_object_name = 'task'
     success_message = _("The task has been successfully updated.")

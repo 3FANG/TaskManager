@@ -63,11 +63,11 @@ class ProtectedInstanceDeleteMixin:
     """
 
     protected_instance_error_message = _("Error message for deleting a linked entity.")
-    protected_instance_redirect = reverse_lazy("home")
+    protected_instance_error_redirect = reverse_lazy("home")
 
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, *kwargs)
         except ProtectedError:
             messages.add_message(request, DANGER, self.protected_instance_error_message)
-            return redirect(self.protected_instance_redirect)
+            return redirect(self.protected_instance_error_redirect)

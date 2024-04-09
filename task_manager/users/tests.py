@@ -175,12 +175,10 @@ class TestDeleteUser(TestCase):
     def test_delete_by_owner_with_protected_instance(self):
         """Удаление профиля, у которого есть связанный задачи, его владельцем."""
         self.client.login(username='1ONE', password='K3GauRS1')
-        response = self.client.get(reverse('delete_user', args=[self.user_1.id]), follow=True)
+        route = reverse('delete_user', args=[self.user_1.id])
+        response = self.client.get(route , follow=True)
         self.assertTemplateUsed(response, 'users/delete.html')
-        response = self.client.post(
-            reverse('delete_user', args=[self.user_1.id]),
-            follow=True
-        )
+        response = self.client.post(route, follow=True)
         self.assertRedirects(response, reverse('all_users'))
         self.assertEqual(get_message_text(response), _("You can't delete a user because they are associated with tasks."))
 

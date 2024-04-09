@@ -56,7 +56,7 @@ class UserDeleteView(PleaseLoginMixin, OwnerTestMixin, SuccessMessageMixin, Prot
     template_name = "users/delete.html"
     success_message = _("User successfully deleted.")
     protected_instance_error_message = _("You can't delete a user because they are associated with tasks.")
-    protected_instance_redirect = reverse_lazy("all_users")
+    protected_instance_error_redirect = reverse_lazy("all_users")
 
     def get_owner(self):
         """Возвращает владельца акакунта."""
