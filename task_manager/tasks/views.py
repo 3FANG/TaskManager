@@ -7,46 +7,57 @@ from django.views.generic import DeleteView
 from django.views.generic import DetailView
 from django.views.generic.edit import FormMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django_filters.views import FilterView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 from task_manager.tasks.models import Tasks
 from task_manager.tasks.forms import TaskCreationForm, FilterTasksForm
 from task_manager.mixins import PleaseLoginMixin, OwnerTestMixin, ProtectedInstanceDeleteMixin
+from task_manager.tasks.filters import TasksFilter
 
 
-class IndexTasksView(PleaseLoginMixin, FormMixin, ListView):
+# class IndexTasksView(PleaseLoginMixin, FormMixin, ListView):
+#     """Класс-представление, выводящий все задачи и форму для фильтрации."""
+
+#     model = Tasks
+#     form_class = FilterTasksForm
+#     success_url = reverse_lazy('all_tasks')
+#     context_object_name = "tasks_list"
+#     template_name = "tasks/index.html"
+
+#     def get_queryset(self):
+#         """Берем параметры из строки запроса и фильтруем полученные задачи."""
+#         queryset = self.model._default_manager.all()
+#         status = self.request.GET.get('status')
+#         executor = self.request.GET.get('executor')
+#         labels = self.request.GET.get('labels')
+
+#         if status:
+#             queryset = queryset.filter(status__id=status)
+#         if executor:
+#             queryset = queryset.filter(executor__id=executor)
+#         if labels:
+#             queryset = queryset.filter(labels__id=labels)
+
+#         return queryset
+    
+#     def get_initial(self):
+#         """Возвращает исходные данные для формы."""
+#         initial = {
+#             'status': self.request.GET.get('status'),
+#             'executor': self.request.GET.get('executor')
+#         }
+#         return initial
+
+
+class IndexTasksView(PleaseLoginMixin, FilterView):
     """Класс-представление, выводящий все задачи и форму для фильтрации."""
 
-    model = Tasks
-    form_class = FilterTasksForm
-    success_url = reverse_lazy('all_tasks')
-    context_object_name = "tasks_list"
     template_name = "tasks/index.html"
-
-    def get_queryset(self):
-        """Берем параметры из строки запроса и фильтруем полученные задачи."""
-        queryset = self.model._default_manager.all()
-        status = self.request.GET.get('status')
-        executor = self.request.GET.get('executor')
-        labels = self.request.GET.get('labels')
-
-        if status:
-            queryset = queryset.filter(status__id=status)
-        if executor:
-            queryset = queryset.filter(executor__id=executor)
-        if labels:
-            queryset = queryset.filter(labels__id=labels)
-
-        return queryset
-    
-    def get_initial(self):
-        """Возвращает исходные данные для формы."""
-        initial = {
-            'status': self.request.GET.get('status'),
-            'executor': self.request.GET.get('executor')
-        }
-        return initial
+    model = Tasks
+    context_object_name = "tasks_list"
+    filterset_class = TasksFilter
 
 
 class ShowTaskView(PleaseLoginMixin, DetailView):

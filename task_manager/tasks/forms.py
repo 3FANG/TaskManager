@@ -21,8 +21,9 @@ class TaskCreationForm(forms.ModelForm):
 class FilterTasksForm(forms.ModelForm):
     """Форма для фильтрации задач."""
 
-    # Переопределяем status, чтобы это поле в форме было необязательным
-    # Также переопределяем labels, чтобы сделать выбор одной метки
+    # Переопределяем status, чтобы это поле в форме было необязательным.
+    # Также переопределяем labels, чтобы сделать выбор одной метки.
+    # В противном случае, поле останется MultipleChoiceField
     status = forms.ModelChoiceField(queryset=Statuses.objects.all(), required=False)
     labels = forms.ModelChoiceField(queryset=Labels.objects.all(), required=False)
 
