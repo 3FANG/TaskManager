@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-08 14:01+0300\n"
+"POT-Creation-Date: 2024-04-09 14:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,14 @@ msgstr "Дата создания"
 #: task_manager/tasks/tests.py:85 task_manager/tasks/tests.py:111
 #: task_manager/tasks/tests.py:114 task_manager/tasks/tests.py:146
 #: task_manager/tasks/tests.py:149 task_manager/tasks/tests.py:175
-#: task_manager/tasks/tests.py:178
+#: task_manager/tasks/tests.py:178 task_manager/tasks/tests/test_create.py:17
+#: task_manager/tasks/tests/test_create.py:20
+#: task_manager/tasks/tests/test_delete.py:18
+#: task_manager/tasks/tests/test_delete.py:21
+#: task_manager/tasks/tests/test_read.py:54
+#: task_manager/tasks/tests/test_read.py:115
+#: task_manager/tasks/tests/test_update.py:17
+#: task_manager/tasks/tests/test_update.py:20
 msgid "You are not logged in! Please log in."
 msgstr "Вы не вошли в систему! Пожалуйста, войдите в систему."
 
@@ -83,6 +90,10 @@ msgstr "Вы не можете удалить статус, потому что 
 msgid "Status has been successfully deleted."
 msgstr "Статус успешно удален."
 
+#: task_manager/tasks/filters.py:11
+msgid "Only your tasks"
+msgstr "Только свои задачи"
+
 #: task_manager/tasks/forms.py:14
 msgid "Press CTRL to select multiple labels."
 msgstr "Зажмите CTRL для выбора нескольких меток."
@@ -119,19 +130,22 @@ msgstr "Задача"
 msgid "label"
 msgstr "Метка"
 
-#: task_manager/tasks/tests.py:99 task_manager/tasks/views.py:67
+#: task_manager/tasks/tests.py:99 task_manager/tasks/tests/test_create.py:34
+#: task_manager/tasks/views.py:78
 msgid "The task has been successfully created."
 msgstr "Задача была успешно создана."
 
-#: task_manager/tasks/tests.py:163 task_manager/tasks/views.py:84
+#: task_manager/tasks/tests.py:163 task_manager/tasks/tests/test_update.py:34
+#: task_manager/tasks/views.py:95
 msgid "The task has been successfully updated."
 msgstr "Задача была успешно обновлена."
 
-#: task_manager/tasks/tests.py:192 task_manager/tasks/views.py:96
+#: task_manager/tasks/tests.py:192 task_manager/tasks/tests/test_delete.py:35
+#: task_manager/tasks/views.py:107
 msgid "The task has been successfully deleted."
 msgstr "Задача была успешно удалена."
 
-#: task_manager/tasks/views.py:98
+#: task_manager/tasks/views.py:109
 msgid "A task can only be deleted by its author."
 msgstr "Задача может быть удалена только его автором."
 
@@ -148,11 +162,11 @@ msgstr "У вас нет прав для изменения другого по�
 msgid "The user data has been successfully changed."
 msgstr "Данные пользователя были успешно изменены."
 
-#: task_manager/users/tests.py:185 task_manager/users/views.py:58
+#: task_manager/users/tests.py:183 task_manager/users/views.py:58
 msgid "You can't delete a user because they are associated with tasks."
 msgstr "Вы не можете удалить пользователя, потому что он связан с задачами."
 
-#: task_manager/users/tests.py:197 task_manager/users/views.py:57
+#: task_manager/users/tests.py:195 task_manager/users/views.py:57
 msgid "User successfully deleted."
 msgstr "Пользователь успешно удален"
 
@@ -222,6 +236,7 @@ msgid "Delete label"
 msgstr "Удалить метку"
 
 #: templates/labels/delete.html:11
+#, python-format
 msgid "Are you sure you want to delete \"%(label)s\"?"
 msgstr "Вы уверены, что хотите удалить метку \"%(label)s\"?"
 

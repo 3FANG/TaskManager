@@ -21,7 +21,7 @@ class LoginUserView(SuccessMessageMixin, LoginView):
 
     authentication_form = AuthenticationForm
     template_name = 'login.html'
-    success_message = _("You have successfully logged in.") # "Вы успешно авторизовались."
+    success_message = _("You have successfully logged in.")
 
 
 #################################################
@@ -39,5 +39,11 @@ class LogoutUserView(LogoutView):
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        messages.add_message(request, messages.INFO, _("You've logged out of your account.")) # 'Вы вышли из аккаунта.'
+        messages.add_message(request, messages.INFO, _("You've logged out of your account."))
         return response
+
+
+def index(request):
+    a = None
+    a.hello() # Creating an error with an invalid line of code
+    return HttpResponse("Hello, world. You're at the pollapp index.")
