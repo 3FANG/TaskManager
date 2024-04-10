@@ -1,11 +1,6 @@
-from django.http import HttpRequest
-from django.http.response import HttpResponse
-from django.shortcuts import render
-from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic import CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -13,7 +8,6 @@ from django.utils.translation import gettext_lazy as _
 
 from task_manager.statuses.models import Statuses
 from task_manager.mixins import PleaseLoginMixin, ProtectedInstanceDeleteMixin
-from task_manager.settings import DANGER
 
 
 class CreateStatusView(PleaseLoginMixin, SuccessMessageMixin, CreateView):
@@ -45,7 +39,12 @@ class UpdateStatusView(PleaseLoginMixin, SuccessMessageMixin, UpdateView):
     success_message = _("Status has been successfully changed.")
 
 
-class DeleteStatusView(PleaseLoginMixin, SuccessMessageMixin, ProtectedInstanceDeleteMixin, DeleteView):
+class DeleteStatusView(
+    PleaseLoginMixin,
+    SuccessMessageMixin,
+    ProtectedInstanceDeleteMixin,
+    DeleteView
+):
     """Класс-представление для удаления статуса."""
 
     model = Statuses
@@ -54,5 +53,5 @@ class DeleteStatusView(PleaseLoginMixin, SuccessMessageMixin, ProtectedInstanceD
     template_name = 'statuses/delete.html'
     context_object_name = 'status'
     success_message = _("Status has been successfully deleted.")
-    protected_instance_error_redirect = reverse_lazy("all_statuses")
-    protected_instance_error_message = _("You can't delete a status because it's associated with tasks.")
+    on_del_redirect = reverse_lazy("all_statuses")
+    on_del_message = _("You can't delete a status because it's associated with tasks.")

@@ -8,7 +8,11 @@ from task_manager.labels.models import Labels
 
 class TasksFilter(django_filters.FilterSet):
     labels = django_filters.ModelChoiceFilter(queryset=Labels.objects.all())
-    self_tasks = django_filters.BooleanFilter(label=_("Only your tasks"), method="get_user_tasks", widget=forms.CheckboxInput)
+    self_tasks = django_filters.BooleanFilter(
+        label=_("Only your tasks"),
+        method="get_user_tasks",
+        widget=forms.CheckboxInput
+    )
 
     def get_user_tasks(self, queryset, name, value):
         """Возвращает задачи только авторизованного пользователя."""

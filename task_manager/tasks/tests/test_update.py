@@ -31,4 +31,7 @@ class TestUpdateTask(SetUpMixin, TestCase):
             with self.subTest("Ошибка обновления задачи", form_data=data):
                 response = self.client.post(route, data=data, follow=True)
                 self.assertRedirects(response, reverse('all_tasks'))
-                self.assertContains(response, _("The task has been successfully updated."))
+                self.assertContains(
+                    response,
+                    _("The task has been successfully updated.")
+                )

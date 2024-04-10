@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from task_manager.tasks.models import Tasks, Labels, Statuses
+from task_manager.tasks.models import Tasks, Labels
 from .fixtures import SetUpMixin
 
 
@@ -70,7 +70,8 @@ class TestReadTasksList(SetUpMixin, TestCase):
         self.client.login(username='1ONE', password='K3GauRS1')
         response = self.client.get(route)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        error_message = f"Ожидаемый результат: {required_tasks}\nПолученный результат:{response.context['tasks_list']}"
+        error_message = f"Ожидаемый результат: {required_tasks}\n\
+Полученный результат:{response.context['tasks_list']}"
         self.assertSetEqual(response.context['tasks_list'], required_tasks, error_message)
 
     def test_filter_task_by_executor(self):
@@ -80,9 +81,10 @@ class TestReadTasksList(SetUpMixin, TestCase):
         self.client.login(username='1ONE', password='K3GauRS1')
         response = self.client.get(route)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        error_message = f"Ожидаемый результат: {required_tasks}\nПолученный результат:{response.context['tasks_list']}"
+        error_message = f"Ожидаемый результат: {required_tasks}\n\
+Полученный результат:{response.context['tasks_list']}"
         self.assertSetEqual(response.context['tasks_list'], required_tasks, error_message)
-        
+
     def test_filter_task_by_labels(self):
         """Фильтрация задач по меткам"""
         route = f"{reverse('all_tasks')}?labels={self.label_1.id}"
@@ -90,7 +92,8 @@ class TestReadTasksList(SetUpMixin, TestCase):
         self.client.login(username='1ONE', password='K3GauRS1')
         response = self.client.get(route)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        error_message = f"Ожидаемый результат: {required_tasks}\nПолученный результат:{response.context['tasks_list']}"
+        error_message = f"Ожидаемый результат: {required_tasks}\n\
+Полученный результат:{response.context['tasks_list']}"
         self.assertSetEqual(response.context['tasks_list'], required_tasks, error_message)
 
     def test_filter_only_your_tasks(self):
@@ -100,7 +103,8 @@ class TestReadTasksList(SetUpMixin, TestCase):
         self.client.login(username='1ONE', password='K3GauRS1')
         response = self.client.get(route)
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        error_message = f"Ожидаемый результат: {required_tasks}\nПолученный результат:{response.context['tasks_list']}"
+        error_message = f"Ожидаемый результат: {required_tasks}\n\
+Полученный результат:{response.context['tasks_list']}"
         self.assertSetEqual(response.context['tasks_list'], required_tasks, error_message)
 
 

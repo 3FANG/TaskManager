@@ -7,11 +7,11 @@ from task_manager.tasks.models import Tasks, Statuses, Labels
 class TaskCreationForm(forms.ModelForm):
     """Форма для создания задачи. Но ее также можно использовать и для ее обновления."""
 
-    # Переопределил __init__, чтобы не создавать с нуля поле labels, а просто к уже существующему
-    # добавить help_text
+    # Переопределил __init__, чтобы не создавать с нуля поле labels,
+    # а просто к уже существующему добавить help_text
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['labels'].help_text = _("Press CTRL to select multiple labels.") # Зажмите CTRL, чтобы выбрать несколько меток
+        self.fields['labels'].help_text = _("Press CTRL to select multiple labels.")
 
     class Meta:
         model = Tasks

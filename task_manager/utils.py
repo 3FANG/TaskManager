@@ -7,5 +7,5 @@ def get_message_text(response) -> str:
         messages = list(get_messages(response.wsgi_request))
         return str(messages[0])
     # Если сообщение отсутствует
-    except IndexError: 
-        return None 
+    except IndexError:
+        return None

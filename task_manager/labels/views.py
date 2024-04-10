@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
@@ -40,7 +39,11 @@ class UpdateLabelView(PleaseLoginMixin, SuccessMessageMixin, UpdateView):
     template_name = "labels/update.html"
 
 
-class DeleteLabelView(PleaseLoginMixin, ProtectedInstanceDeleteMixin, SuccessMessageMixin, DeleteView):
+class DeleteLabelView(
+    PleaseLoginMixin,
+    ProtectedInstanceDeleteMixin,
+    SuccessMessageMixin, DeleteView
+):
     """Класс-представление для удаления метки"""
 
     model = Labels
@@ -49,5 +52,5 @@ class DeleteLabelView(PleaseLoginMixin, ProtectedInstanceDeleteMixin, SuccessMes
     success_url = reverse_lazy("all_labels")
     success_message = _("The label has been successfully removed.")
     template_name = "labels/delete.html"
-    protected_instance_error_redirect = reverse_lazy("all_labels")
-    protected_instance_error_message = _("You can't delete a label because it's associated with tasks.")
+    on_del_redirect = reverse_lazy("all_labels")
+    on_del_message = _("You can't delete a label because it's associated with tasks.")

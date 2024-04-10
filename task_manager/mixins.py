@@ -10,12 +10,12 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from task_manager.settings import DANGER
-        
+
 
 class PleaseLoginMixin(LoginRequiredMixin):
     """Тот же LoginRequiredMixin, но добавляет сообщение."""
 
-    error_message = _("You are not logged in! Please log in.") # Вы не авторизованы! Пожалуйста, выполните вход.
+    error_message = _("You are not logged in! Please log in.")
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -25,10 +25,13 @@ class PleaseLoginMixin(LoginRequiredMixin):
 
 class OwnerTestMixin(UserPassesTestMixin):
     # Может просто переопределить dispatch(), а не наследовать UserPassesTestMixin,
-    # использовать test_func(), а затем обрабатывать возникновние ошибки в handle_no_permission?
+    # потом использовать test_func(),
+    # а затем обрабатывать возникновние ошибки в handle_no_permission?
     #
-    # Также может вместо переопределения get_owner() у дочерних классов сделать функцию-диспетчер для 
-    # определения типа модели и возращения соответствующего поля, отвечающего за владельца?
+    # Также может вместо переопределения get_owner() у дочерних классов
+    # сделать функцию-диспетчер для
+    # определения типа модели и возращения соответствующего поля,
+    # отвечающего за владельца?
     """Миксин, проверяющий, является ли пользователь владельцем аккаунта.
 
     Также проверяет, аутентифицирован ли пользователь,
@@ -40,14 +43,14 @@ class OwnerTestMixin(UserPassesTestMixin):
     @abstractmethod
     def get_owner(self):
         return None
-    
+
     def test_func(self):
         obj = self.get_owner()
         if obj != self.request.user:
             messages.add_message(self.request, DANGER, self.error_access_owner_message)
             return False
         return True
-    
+
     # Костыль, чтобы вместо ошибки 403 перенаправлял на страницу со всеми пользователями
     def handle_no_permission(self):
         try:
@@ -58,16 +61,17 @@ class OwnerTestMixin(UserPassesTestMixin):
 
 class ProtectedInstanceDeleteMixin:
     """Обработка ошибки, связанной с удалением связанного поля.
-    
-    В случае возникновения ошибки выводит сообщение и выполняет редирект на указанную страницу.
+
+    В случае возникновения ошибки выводит сообщение
+    и выполняет редирект на указанную страницу.
     """
 
-    protected_instance_error_message = _("Error message for deleting a linked entity.")
-    protected_instance_error_redirect = reverse_lazy("home")
+    on_del_message = _("Error message for deleting a linked entity.")
+    on_del_redirect = reverse_lazy("home")
 
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, *kwargs)
         except ProtectedError:
-            messages.add_message(request, DANGER, self.protected_instance_error_message)
-            return redirect(self.protected_instance_error_redirect)
+            messages.add_message(request, DANGER, self.on_del_message)
+            return redirect(self.on_del_redirect)

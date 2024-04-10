@@ -12,7 +12,7 @@ class TestDeleteTask(SetUpMixin, TestCase):
     def test_delete_by_unauthorized_user(self):
         """Попытка удалить задачу неавторизованным пользователем."""
         route = reverse('delete_task', args=[self.task.id])
-        redirect_url = f'/login/?next=/tasks/{self.task.id}/delete/' # можно ли использовать route?
+        redirect_url = f'/login/?next={route}'
         response = self.client.get(route, follow=True)
         self.assertRedirects(response, redirect_url)
         self.assertContains(response, _("You are not logged in! Please log in."))

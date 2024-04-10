@@ -1,8 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.views import View
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.forms import AuthenticationForm
@@ -24,26 +23,10 @@ class LoginUserView(SuccessMessageMixin, LoginView):
     success_message = _("You have successfully logged in.")
 
 
-#################################################
-# А если неавторизованный пользователь выйдет ? #
-#################################################
 class LogoutUserView(LogoutView):
     """Класс-представление для выхода пользователя."""
 
-    # LogoutView calls the logout method and the logout method calls request.session.flush()
-    # which will delete any messages when using the SessionStorage backend.
-    # You could either move to using the CookieStorage backend,
-    # as I don't think this would be affected by request.session.flush
-    # 
-    # https://stackoverflow.com/questions/59593854/display-messages-on-logoutview
-
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-        messages.add_message(request, messages.INFO, _("You've logged out of your account."))
-        return response
-
-
-def index(request):
-    a = None
-    a.hello() # Creating an error with an invalid line of code
-    return HttpResponse("Hello, world. You're at the pollapp index.")
+    def post(self, request, *args, **kwargs):
+        resposne = super().post(request, *args, **kwargs)
+        messages.info(request, _("You've logged out of your account."))
+        return resposne

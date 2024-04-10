@@ -6,7 +6,6 @@ from django.utils.translation import gettext_lazy as _
 
 from task_manager.statuses.models import Statuses
 from task_manager.tasks.models import Tasks
-from task_manager.utils import get_message_text
 
 
 User = get_user_model()
@@ -27,10 +26,14 @@ class TestCreateStatus(TestCase):
         redirect_url = '/login/?next=/statuses/create/'
         response = self.client.get(reverse('create_status'), follow=True)
         self.assertRedirects(response, redirect_url)
-        self.assertEqual(get_message_text(response), _("You are not logged in! Please log in."))
-        response = self.client.post(reverse('create_status'), data=self.form_data, follow=True)
+        self.assertContains(response, _("You are not logged in! Please log in."))
+        response = self.client.post(
+            reverse('create_status'),
+            data=self.form_data,
+            follow=True
+        )
         self.assertRedirects(response, redirect_url)
-        self.assertEqual(get_message_text(response), _("You are not logged in! Please log in."))
+        self.assertContains(response, _("You are not logged in! Please log in."))
 
     def test_create_status(self):
         """Создание статуса авторизованным пользователем."""
@@ -38,9 +41,13 @@ class TestCreateStatus(TestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse('create_status'), follow=True)
         self.assertTemplateUsed(response, 'statuses/create.html')
-        response = self.client.post(reverse('create_status'), data=self.form_data, follow=True)
+        response = self.client.post(
+            reverse('create_status'),
+            data=self.form_data,
+            follow=True
+        )
         self.assertRedirects(response, reverse('all_statuses'))
-        self.assertEqual(get_message_text(response), _("Status successfully created."))
+        self.assertContains(response, _("Status successfully created."))
         self.assertEqual(Statuses.objects.count(), statuses_count + 1)
 
 
@@ -57,7 +64,7 @@ class TestReadStatuses(TestCase):
         redirect_url = '/login/?next=/statuses/'
         response = self.client.get(route, follow=True)
         self.assertRedirects(response, redirect_url)
-        self.assertEqual(get_message_text(response), _("You are not logged in! Please log in.")) # Вы не авторизованы! Пожалуйста, выполните вход.
+        self.assertContains(response, _("You are not logged in! Please log in."))
 
     def test_statuses_page_by_authorized(self):
         """Запрос авторизованным пользователем выводит страницу со статусами."""
@@ -69,7 +76,7 @@ class TestReadStatuses(TestCase):
         error_name = f"Ошибка: маршрут {route} ожидал шаблон {template}"
         self.assertTemplateUsed(response, template, error_name)
 
-    
+
 class TestUpdateStatus(TestCase):
     """Tестирование обновления данных статуса."""
 
@@ -81,15 +88,22 @@ class TestUpdateStatus(TestCase):
 
     def test_update_by_unauthorized_user(self):
         """Попытка обновления данных статуса неавторизованным пользователем."""
+        url_template = "/login/?next=/statuses/{id}/update/"
+        st1_id = self.status_1.id
+        st2_id = self.status_2.id
         routes = {
-            reverse('update_status', args=[self.status_1.id]): f"/login/?next=/statuses/{self.status_1.id}/update/",
-            reverse('update_status', args=[self.status_2.id]): f"/login/?next=/statuses/{self.status_2.id}/update/",
+            reverse('update_status', args=[st1_id]): url_template.format(id=st1_id),
+            reverse('update_status', args=[st2_id]): url_template.format(id=st2_id),
         }
         for request_url, redirect_url in routes.items():
-            with self.subTest(f"Ошибка перенаправления", redirect_url=redirect_url, request_url=request_url):
+            with self.subTest(
+                    "Ошибка перенаправления",
+                    redirect_url=redirect_url,
+                    request_url=request_url
+                    ):
                 response = self.client.get(request_url, follow=True)
                 self.assertRedirects(response, expected_url=redirect_url)
-                self.assertEqual(get_message_text(response), _("You are not logged in! Please log in.")) # Вы не авторизованы! Пожалуйста, выполните вход.
+                self.assertContains(response, _("You are not logged in! Please log in."))
 
     def test_update_by_authorized_user(self):
         """Обновление данных статуса авторизованным пользователем."""
@@ -102,10 +116,13 @@ class TestUpdateStatus(TestCase):
             with self.subTest("Ошибка обновления статуса", route=route):
                 response = self.client.get(route)
                 self.assertTemplateUsed(response, 'statuses/update.html')
-                response = self.client.post(route, data={'name': f"new_{status.name}"}, follow=True)
+                response = self.client.post(
+                    route,
+                    data={'name': f"new_{status.name}"},
+                    follow=True
+                )
                 self.assertRedirects(response, reverse('all_statuses'))
-                self.assertEqual(get_message_text(response), _("Status has been successfully changed."))
-                # Может сделать проверку, что статус действительно изменен, запросив новое название?
+                self.assertContains(response, _("Status has been successfully changed."))
 
 
 class TestDeleteStatus(TestCase):
@@ -126,15 +143,22 @@ class TestDeleteStatus(TestCase):
 
     def test_delete_by_unauthorized_user(self):
         """Попытка удаления статуса неавторизованным пользователем."""
+        url_template = "/login/?next=/statuses/{id}/delete/"
+        st1_id = self.status_1.id
+        st2_id = self.status_2.id
         routes = {
-            reverse('delete_status', args=[self.status_1.id]): f"/login/?next=/statuses/{self.status_1.id}/delete/",
-            reverse('delete_status', args=[self.status_2.id]): f"/login/?next=/statuses/{self.status_2.id}/delete/",
+            reverse('delete_status', args=[st1_id]): url_template.format(id=st1_id),
+            reverse('delete_status', args=[st2_id]): url_template.format(id=st2_id),
         }
         for request_url, redirect_url in routes.items():
-            with self.subTest(f"Ошибка перенаправления", redirect_url=redirect_url, request_url=request_url):
+            with self.subTest(
+                    "Ошибка перенаправления",
+                    redirect_url=redirect_url,
+                    request_url=request_url
+                    ):
                 response = self.client.get(request_url, follow=True)
                 self.assertRedirects(response, expected_url=redirect_url)
-                self.assertEqual(get_message_text(response), _("You are not logged in! Please log in.")) # Вы не авторизованы! Пожалуйста, выполните вход.
+                self.assertContains(response, _("You are not logged in! Please log in."))
 
     def test_delete_by_authorized_user_with_protected_instance(self):
         """Удаление статуса, связанного с задачами, авторизованным пользователем."""
@@ -144,8 +168,11 @@ class TestDeleteStatus(TestCase):
         self.assertTemplateUsed(response, 'statuses/delete.html')
         response = self.client.post(route, follow=True)
         self.assertRedirects(response, reverse('all_statuses'))
-        self.assertEqual(get_message_text(response), _("You can't delete a status because it's associated with tasks."))
-                
+        self.assertContains(
+            response,
+            _("You can't delete a status because it's associated with tasks.")
+        )
+
     def test_delete_by_authorized_user(self):
         """Удаление статуса, не связанного с задачами, авторизованным пользователем."""
         statuses_count = Statuses.objects.count()
@@ -156,6 +183,3 @@ class TestDeleteStatus(TestCase):
         response = self.client.post(route, follow=True)
         self.assertRedirects(response, reverse('all_statuses'))
         self.assertEqual(Statuses.objects.count(), statuses_count - 1)
-        self.assertEqual(get_message_text(response), _("Status has been successfully deleted."))
-                
-

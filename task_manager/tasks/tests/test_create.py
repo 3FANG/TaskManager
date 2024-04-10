@@ -15,10 +15,13 @@ class TestCreateTask(SetUpMixin, TestCase):
         response = self.client.get(route, follow=True)
         self.assertRedirects(response, redirect_url)
         self.assertContains(response, _("You are not logged in! Please log in."))
-        response = self.client.post(route, data=self.create_form_data[0], follow=True)
+        response = self.client.post(
+            route,
+            data=self.create_form_data[0],
+            follow=True
+        )
         self.assertRedirects(response, redirect_url)
         self.assertContains(response, _("You are not logged in! Please log in."))
-        
 
     def test_create_by_authorized_user(self):
         """Создание задачи авторизованным пользователем."""
@@ -31,4 +34,7 @@ class TestCreateTask(SetUpMixin, TestCase):
             with self.subTest("Ошибка создания задачи", form_data=data):
                 response = self.client.post(route, data=data, follow=True)
                 self.assertRedirects(response, reverse('all_tasks'))
-                self.assertContains(response, _("The task has been successfully created."))
+                self.assertContains(
+                    response,
+                    _("The task has been successfully created.")
+                )

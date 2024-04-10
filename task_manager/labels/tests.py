@@ -46,10 +46,13 @@ class TestCreateLabel(SetUpMixin, TestCase):
         response = self.client.get(reverse("create_label"), follow=True)
         self.assertRedirects(response, redirect_url)
         self.assertContains(response, _("You are not logged in! Please log in."))
-        response = self.client.post(reverse('create_label'), data=self.form_data, follow=True)
+        response = self.client.post(
+            reverse('create_label'),
+            data=self.form_data,
+            follow=True
+        )
         self.assertRedirects(response, redirect_url)
         self.assertContains(response, _("You are not logged in! Please log in."))
-
 
     def test_create_by_authorized_user(self):
         """Создание метки автотризованным пользователем."""
@@ -57,7 +60,11 @@ class TestCreateLabel(SetUpMixin, TestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse('create_label'), follow=True)
         self.assertTemplateUsed(response, 'labels/create.html')
-        response = self.client.post(reverse('create_label'), data=self.form_data, follow=True)
+        response = self.client.post(
+            reverse('create_label'),
+            data=self.form_data,
+            follow=True
+        )
         self.assertRedirects(response, reverse('all_labels'))
         self.assertContains(response, _("Label successfully created."))
         self.assertEqual(Labels.objects.count(), labels_count + 1)
@@ -89,12 +96,19 @@ class TestUpdateLabels(SetUpMixin, TestCase):
 
     def test_update_by_unauthorized_user(self):
         """Попытка обновления данных метки неавторизованным пользователем."""
+        url_template = "/login/?next=/labels/{id}/update/"
+        lb1_id = self.label_1.id
+        lb2_id = self.label_2.id
         routes = {
-            reverse('update_label', args=[self.label_1.id]): f"/login/?next=/labels/{self.label_1.id}/update/",
-            reverse('update_label', args=[self.label_2.id]): f"/login/?next=/labels/{self.label_2.id}/update/",
+            reverse('update_label', args=[lb1_id]): url_template.format(id=lb1_id),
+            reverse('update_label', args=[lb2_id]): url_template.format(id=lb2_id),
         }
         for request_url, redirect_url in routes.items():
-            with self.subTest(f"Ошибка перенаправления", redirect_url=redirect_url, request_url=request_url):
+            with self.subTest(
+                    "Ошибка перенаправления",
+                    redirect_url=redirect_url,
+                    request_url=request_url
+                    ):
                 response = self.client.get(request_url, follow=True)
                 self.assertRedirects(response, expected_url=redirect_url)
                 self.assertContains(response, _("You are not logged in! Please log in."))
@@ -110,7 +124,10 @@ class TestUpdateLabels(SetUpMixin, TestCase):
             with self.subTest("Ошибка обновления метки", route=route):
                 response = self.client.get(route)
                 self.assertTemplateUsed(response, 'labels/update.html')
-                response = self.client.post(route, data={"name": f"New {label.name}"}, follow=True)
+                response = self.client.post(
+                    route, data={"name": f"New {label.name}"},
+                    follow=True
+                )
                 self.assertRedirects(response, reverse('all_labels'))
                 self.assertContains(response, _("Label has been successfully changed."))
 
@@ -120,12 +137,19 @@ class TestDeleteLabels(SetUpMixin, TestCase):
 
     def test_delete_by_unauthorized_user(self):
         """Попытка удаления метки неавторизованным пользователем."""
+        url_template = "/login/?next=/labels/{id}/delete/"
+        lb1_id = self.label_1.id
+        lb2_id = self.label_2.id
         routes = {
-            reverse('delete_label', args=[self.label_1.id]): f"/login/?next=/labels/{self.label_1.id}/delete/",
-            reverse('delete_label', args=[self.label_1.id]): f"/login/?next=/labels/{self.label_1.id}/delete/",
+            reverse('delete_label', args=[lb1_id]): url_template.format(id=lb1_id),
+            reverse('delete_label', args=[lb2_id]): url_template.format(id=lb2_id),
         }
         for request_url, redirect_url in routes.items():
-            with self.subTest(f"Ошибка перенаправления", redirect_url=redirect_url, request_url=request_url):
+            with self.subTest(
+                    "Ошибка перенаправления",
+                    redirect_url=redirect_url,
+                    request_url=request_url
+                    ):
                 response = self.client.get(request_url, follow=True)
                 self.assertRedirects(response, redirect_url)
                 self.assertContains(response, _("You are not logged in! Please log in."))
@@ -138,10 +162,16 @@ class TestDeleteLabels(SetUpMixin, TestCase):
         self.assertTemplateUsed(response, 'labels/delete.html')
         response = self.client.post(route, follow=True)
         self.assertRedirects(response, reverse('all_labels'))
-        # Почему не работае assertContains()?
-        # self.assertContains(response, _("You can't delete a label because it's associated with tasks."))
-        self.assertEqual(get_message_text(response), _("You can't delete a label because it's associated with tasks."))
-                
+        # Почему не работает assertContains()?
+        # self.assertContains(
+        #   response,
+        #   _("You can't delete a label because it's associated with tasks.")
+        # )
+        self.assertEqual(
+            get_message_text(response),
+            _("You can't delete a label because it's associated with tasks.")
+        )
+
     def test_delete_by_authorized_user(self):
         """Удаление метки, не связанной с задачами, авторизованным пользователем."""
         labels_count = Labels.objects.count()

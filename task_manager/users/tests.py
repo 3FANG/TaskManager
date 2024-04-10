@@ -2,7 +2,6 @@ from http import HTTPStatus
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User as source_user
 from django.utils.translation import gettext_lazy as _
 
 from task_manager.utils import get_message_text
@@ -27,10 +26,12 @@ class TestCreateUser(TestCase):
             'password2': 'K3GauRS1'
         }
         response = self.client.post(reverse('signup_user'), data=form_data, follow=True)
-        # Перенаправляет на страницу авторизации, добавляет в базу нового пользователя и показывает сообщение
         self.assertRedirects(response, reverse('login_user'))
         self.assertEqual(User.objects.count(), users_count + 1)
-        self.assertEqual(get_message_text(response), _("You have been successfully signed in."))
+        self.assertEqual(
+            get_message_text(response),
+            _("You have been successfully signed in.")
+        )
 
 
 class TestReadUser(TestCase):
@@ -74,23 +75,33 @@ class TestUpdateUser(TestCase):
 
     def test_redirect_unauthorized_user(self):
         """Редирект неавторизированного пользователя на страницу авторизации."""
+        upd_user1_route = reverse('update_user', args=[self.test_user_1.id])
+        upd_user2_route = reverse('update_user', args=[self.test_user_2.id])
         redirect_routes = {
-            reverse('update_user', args=[self.test_user_1.id]): f"/login/?next=/users/{self.test_user_1.id}/update/",
-            reverse('update_user', args=[self.test_user_2.id]): f"/login/?next=/users/{self.test_user_2.id}/update/",
+            upd_user1_route: f"/login/?next={upd_user1_route}",
+            upd_user2_route: f"/login/?next={upd_user2_route}",
         }
         for request_url, redirect_url in redirect_routes.items():
-            with self.subTest(f"Ошибка перенаправления", redirect_url=redirect_url, request_url=request_url):
+            with self.subTest(
+                    "Ошибка перенаправления",
+                    redirect_url=redirect_url,
+                    request_url=request_url
+                    ):
                 response = self.client.get(request_url)
                 self.assertRedirects(response, redirect_url)
 
     def test_updates_not_by_owner(self):
         """Изменения профиля не его владельцем."""
         self.client.login(username='1ONE', password='K3GauRS1')
-        response = self.client.get(reverse('update_user', args=[self.test_user_2.id]), follow=True)
-        # Перенаправляет на ту же страницу и показывает сообщение
+        response = self.client.get(
+            reverse('update_user', args=[self.test_user_2.id]),
+            follow=True
+        )
         self.assertRedirects(response, expected_url=reverse('all_users'))
-        self.assertEqual(get_message_text(response), _("You don't have permissions to modify another user."))
-        # То же самое, но для POST
+        self.assertEqual(
+            get_message_text(response),
+            _("You don't have permissions to modify another user.")
+        )
         response = self.client.post(
             reverse('update_user', args=[self.test_user_2.id]),
             data={
@@ -101,12 +112,18 @@ class TestUpdateUser(TestCase):
             follow=True
         )
         self.assertRedirects(response, expected_url=reverse('all_users'))
-        self.assertEqual(get_message_text(response), _("You don't have permissions to modify another user."))
+        self.assertEqual(
+            get_message_text(response),
+            _("You don't have permissions to modify another user.")
+        )
 
     def test_updates_by_owner(self):
         """Изменения профиля его владельцем."""
         self.client.login(username='1ONE', password='K3GauRS1')
-        response = self.client.get(reverse('update_user', args=[self.test_user_1.id]), follow=True)
+        response = self.client.get(
+            reverse('update_user', args=[self.test_user_1.id]),
+            follow=True
+        )
         self.assertTemplateUsed(response, 'users/update.html')
         response = self.client.post(
             reverse('update_user', args=[self.test_user_1.id]),
@@ -118,15 +135,14 @@ class TestUpdateUser(TestCase):
             follow=True
         )
         self.assertRedirects(response, reverse('all_users'))
-        self.assertEqual(get_message_text(response), _("The user data has been successfully changed."))
+        self.assertEqual(
+            get_message_text(response),
+            _("The user data has been successfully changed.")
+        )
 
 
 class TestDeleteUser(TestCase):
     """Тестирование удаления пользователя."""
-
-    ####################################################################
-    # В проекте нельзя удалить пользователя, если он связан с задачами #
-    ####################################################################
 
     def setUp(self) -> None:
         self.user_1 = User.objects.create_user(
@@ -148,44 +164,63 @@ class TestDeleteUser(TestCase):
 
     def test_redirect_unauthorized_user(self):
         """Редирект неавторизированного пользователя на страницу авторизации."""
+        del_user1_route = reverse('delete_user', args=[self.user_1.id])
+        del_user2_route = reverse('delete_user', args=[self.user_2.id])
         redirect_routes = {
-            reverse('delete_user', args=[self.user_1.id]): f"/login/?next=/users/{self.user_1.id}/delete/",
-            reverse('delete_user', args=[self.user_2.id]): f"/login/?next=/users/{self.user_2.id}/delete/",
+            del_user1_route: f"/login/?next={del_user1_route}",
+            del_user2_route: f"/login/?next={del_user2_route}",
         }
         for request_url, redirect_url in redirect_routes.items():
-            with self.subTest(f"Ошибка перенаправления", redirect_url=redirect_url, request_url=request_url):
+            with self.subTest(
+                    "Ошибка перенаправления",
+                    redirect_url=redirect_url,
+                    request_url=request_url
+                    ):
                 response = self.client.get(request_url)
                 self.assertRedirects(response, redirect_url)
 
     def test_delete_not_by_owner(self):
         """Удаление профиля не его владельцем."""
         self.client.login(username='1ONE', password='K3GauRS1')
-        response = self.client.get(reverse('delete_user', args=[self.user_2.id]), follow=True)
-        # Перенаправляет на страницу со всеми пользователями и показывает сообщение
+        response = self.client.get(
+            reverse('delete_user', args=[self.user_2.id]),
+            follow=True
+        )
         self.assertRedirects(response, expected_url=reverse('all_users'))
-        self.assertEqual(get_message_text(response), _("You do not have permissions to delete another user."))
-        # То же самое, но для POST
+        self.assertEqual(
+            get_message_text(response),
+            _("You do not have permissions to delete another user.")
+        )
         response = self.client.post(
             reverse('delete_user', args=[self.user_2.id]),
             follow=True
         )
         self.assertRedirects(response, expected_url=reverse('all_users'))
-        self.assertEqual(get_message_text(response), _("You do not have permissions to delete another user."))
+        self.assertEqual(
+            get_message_text(response),
+            _("You do not have permissions to delete another user.")
+        )
 
     def test_delete_by_owner_with_protected_instance(self):
         """Удаление профиля, у которого есть связанный задачи, его владельцем."""
         self.client.login(username='1ONE', password='K3GauRS1')
         route = reverse('delete_user', args=[self.user_1.id])
-        response = self.client.get(route , follow=True)
+        response = self.client.get(route, follow=True)
         self.assertTemplateUsed(response, 'users/delete.html')
         response = self.client.post(route, follow=True)
         self.assertRedirects(response, reverse('all_users'))
-        self.assertEqual(get_message_text(response), _("You can't delete a user because they are associated with tasks."))
+        self.assertEqual(
+            get_message_text(response),
+            _("You can't delete a user because they are associated with tasks.")
+        )
 
     def test_delete_by_owner(self):
         """Удаление профиля, у которого нет свяханных задач, его владельцем."""
         self.client.login(username='DonUn', password='9o3rQaAc')
-        response = self.client.get(reverse('delete_user', args=[self.user_2.id]), follow=True)
+        response = self.client.get(
+            reverse('delete_user', args=[self.user_2.id]),
+            follow=True
+        )
         self.assertTemplateUsed(response, 'users/delete.html')
         response = self.client.post(
             reverse('delete_user', args=[self.user_2.id]),

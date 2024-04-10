@@ -8,7 +8,11 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from task_manager.users.forms import UserRegisterForm
-from task_manager.mixins import OwnerTestMixin, PleaseLoginMixin, ProtectedInstanceDeleteMixin
+from task_manager.mixins import (
+    OwnerTestMixin,
+    PleaseLoginMixin,
+    ProtectedInstanceDeleteMixin
+)
 
 
 User = get_user_model()
@@ -20,7 +24,7 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
     form_class = UserRegisterForm
     template_name = 'users/signup.html'
     success_url = reverse_lazy('login_user')
-    success_message = _("You have been successfully signed in.") # 'Вы успешно зарегистрированы.'
+    success_message = _("You have been successfully signed in.")
 
 
 class GetUsersView(ListView):
@@ -29,6 +33,10 @@ class GetUsersView(ListView):
     model = User
     context_object_name = "users_list"
     template_name = "users/index.html"
+
+    def get_queryset(self):
+        """Вывод всех пользователей, кроме персонала."""
+        return self.model._default_manager.filter(is_staff=False)
 
 
 class UserUpdateView(PleaseLoginMixin, OwnerTestMixin, SuccessMessageMixin, UpdateView):
@@ -47,7 +55,13 @@ class UserUpdateView(PleaseLoginMixin, OwnerTestMixin, SuccessMessageMixin, Upda
         return self.get_object()
 
 
-class UserDeleteView(PleaseLoginMixin, OwnerTestMixin, SuccessMessageMixin, ProtectedInstanceDeleteMixin, DeleteView):
+class UserDeleteView(
+    PleaseLoginMixin,
+    OwnerTestMixin,
+    SuccessMessageMixin,
+    ProtectedInstanceDeleteMixin,
+    DeleteView
+):
     """Класс-представление для удаление отдельного пользователя."""
 
     model = User
@@ -55,8 +69,8 @@ class UserDeleteView(PleaseLoginMixin, OwnerTestMixin, SuccessMessageMixin, Prot
     success_url = reverse_lazy('all_users')
     template_name = "users/delete.html"
     success_message = _("User successfully deleted.")
-    protected_instance_error_message = _("You can't delete a user because they are associated with tasks.")
-    protected_instance_error_redirect = reverse_lazy("all_users")
+    on_del_message = _("You can't delete a user because they are associated with tasks.")
+    on_del_redirect = reverse_lazy("all_users")
 
     def get_owner(self):
         """Возвращает владельца акакунта."""
