@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-11 12:29+0300\n"
+"POT-Creation-Date: 2024-04-11 14:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,6 +87,10 @@ msgstr "Невозможно удалить статус, потому что о
 msgid "Status has been successfully deleted."
 msgstr "Статус успешно удален."
 
+#: task_manager/tasks/filters.py:10
+msgid "Label"
+msgstr "Метка"
+
 #: task_manager/tasks/filters.py:12
 msgid "Only your tasks"
 msgstr "Только свои задачи"
@@ -143,8 +147,8 @@ msgstr "Задача успешно изменена."
 msgid "A task can only be deleted by its author."
 msgstr "Задачу может удалить только ее автор."
 
-#: task_manager/users/tests.py:33 task_manager/users/views.py:27
-msgid "User have been successfully signed in."
+#: task_manager/users/tests.py:33
+msgid "You have been successfully signed in."
 msgstr "Пользователь успешно зарегистрирован."
 
 #: task_manager/users/tests.py:103 task_manager/users/tests.py:117
@@ -163,6 +167,10 @@ msgstr "Невозможно удалить пользователя, потом
 #: task_manager/users/tests.py:230 task_manager/users/views.py:71
 msgid "User successfully deleted."
 msgstr "Пользователь успешно удален"
+
+#: task_manager/users/views.py:27
+msgid "User have been successfully signed in."
+msgstr "Пользователь успешно зарегистрирован."
 
 #: task_manager/views.py:23
 msgid "You have successfully logged in."
@@ -334,10 +342,6 @@ msgstr "Исполнитель"
 #: templates/tasks/show.html:8
 msgid "Viewing a task"
 msgstr "Просмотр задачи"
-
-#: templates/tasks/show.html:33
-msgid "Lables"
-msgstr "Метки"
 
 #: templates/tasks/update.html:8
 msgid "Changing task"
