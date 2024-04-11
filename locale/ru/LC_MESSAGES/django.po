@@ -52,20 +52,20 @@ msgstr "Метка успешно создана."
 
 #: task_manager/labels/tests.py:132 task_manager/labels/views.py:38
 msgid "Label has been successfully changed."
-msgstr "Метка была успешно изменена."
+msgstr "Метка успешно изменена."
 
 #: task_manager/labels/tests.py:172 task_manager/labels/views.py:56
 msgid "You can't delete a label because it's associated with tasks."
-msgstr "Вы не можете удалить метку, потому что она связана с задачами."
+msgstr "Невозможно удалить метку, потому что она используется."
 
 #: task_manager/labels/tests.py:185 task_manager/labels/views.py:53
 msgid "The label has been successfully removed."
-msgstr "Метка была успешно создана."
+msgstr "Метка успешно удалена."
 
 #: task_manager/mixins.py:40 task_manager/users/tests.py:192
 #: task_manager/users/tests.py:201
 msgid "You do not have permissions to delete another user."
-msgstr "У вас нет прав для удаления другого пользователя."
+msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/mixins.py:69
 msgid "Error message for deleting a linked entity."
@@ -77,11 +77,11 @@ msgstr "Статус успешно создан."
 
 #: task_manager/statuses/tests.py:125 task_manager/statuses/views.py:39
 msgid "Status has been successfully changed."
-msgstr "Статус был успешно изменен."
+msgstr "Статус успешно изменен."
 
 #: task_manager/statuses/tests.py:173 task_manager/statuses/views.py:57
 msgid "You can't delete a status because it's associated with tasks."
-msgstr "Вы не можете удалить статус, потому что он связан с задачами."
+msgstr "Невозможно удалить статус, потому что он используется."
 
 #: task_manager/statuses/views.py:55
 msgid "Status has been successfully deleted."
@@ -129,23 +129,23 @@ msgstr "Метка"
 
 #: task_manager/tasks/tests/test_create.py:39 task_manager/tasks/views.py:40
 msgid "The task has been successfully created."
-msgstr "Задача была успешно создана."
+msgstr "Задача успешно создана."
 
 #: task_manager/tasks/tests/test_delete.py:35 task_manager/tasks/views.py:69
 msgid "The task has been successfully deleted."
-msgstr "Задача была успешно удалена."
+msgstr "Задача успешно удалена."
 
 #: task_manager/tasks/tests/test_update.py:36 task_manager/tasks/views.py:57
 msgid "The task has been successfully updated."
-msgstr "Задача была успешно обновлена."
+msgstr "Задача успешно изменена."
 
 #: task_manager/tasks/views.py:71
 msgid "A task can only be deleted by its author."
-msgstr "Задача может быть удалена только его автором."
+msgstr "Задачу может удалить только ее автор."
 
 #: task_manager/users/tests.py:33 task_manager/users/views.py:27
-msgid "You have been successfully signed in."
-msgstr "Вы успешно зарегистрированы."
+msgid "User have been successfully signed in."
+msgstr "Пользователь успешно зарегистрирован."
 
 #: task_manager/users/tests.py:103 task_manager/users/tests.py:117
 #: task_manager/users/views.py:51
