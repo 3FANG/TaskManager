@@ -224,3 +224,7 @@ ROLLBAR = {
 }
 
 rollbar.init(**ROLLBAR)
+
+
+# Переопределяем модель пользователя
+AUTH_USER_MODEL = 'users.User'
