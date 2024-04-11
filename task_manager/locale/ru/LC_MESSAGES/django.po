@@ -170,7 +170,7 @@ msgstr "Вы залогинены."
 
 #: task_manager/views.py:31
 msgid "You've logged out of your account."
-msgstr "Вы вышли из аккаунта."
+msgstr "Вы разлогинены."
 
 #: templates/base.html:13 templates/base.html:26
 msgid "Task Manager"
