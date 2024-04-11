@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-09 14:53+0300\n"
+"POT-Creation-Date: 2024-04-11 08:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,72 +25,69 @@ msgid "name"
 msgstr "Имя"
 
 #: task_manager/labels/models.py:7 task_manager/statuses/models.py:8
-#: task_manager/tasks/models.py:19
+#: task_manager/tasks/models.py:38
 msgid "date created"
 msgstr "Дата создания"
 
-#: task_manager/labels/tests.py:48 task_manager/labels/tests.py:51
-#: task_manager/labels/tests.py:74 task_manager/labels/tests.py:100
-#: task_manager/labels/tests.py:131 task_manager/mixins.py:18
-#: task_manager/statuses/tests.py:30 task_manager/statuses/tests.py:33
-#: task_manager/statuses/tests.py:60 task_manager/statuses/tests.py:92
-#: task_manager/statuses/tests.py:137 task_manager/tasks/tests.py:82
-#: task_manager/tasks/tests.py:85 task_manager/tasks/tests.py:111
-#: task_manager/tasks/tests.py:114 task_manager/tasks/tests.py:146
-#: task_manager/tasks/tests.py:149 task_manager/tasks/tests.py:175
-#: task_manager/tasks/tests.py:178 task_manager/tasks/tests/test_create.py:17
-#: task_manager/tasks/tests/test_create.py:20
+#: task_manager/labels/tests.py:48 task_manager/labels/tests.py:55
+#: task_manager/labels/tests.py:81 task_manager/labels/tests.py:114
+#: task_manager/labels/tests.py:155 task_manager/mixins.py:18
+#: task_manager/statuses/tests.py:29 task_manager/statuses/tests.py:36
+#: task_manager/statuses/tests.py:67 task_manager/statuses/tests.py:106
+#: task_manager/statuses/tests.py:161
+#: task_manager/tasks/tests/test_create.py:17
+#: task_manager/tasks/tests/test_create.py:24
 #: task_manager/tasks/tests/test_delete.py:18
 #: task_manager/tasks/tests/test_delete.py:21
 #: task_manager/tasks/tests/test_read.py:54
-#: task_manager/tasks/tests/test_read.py:115
+#: task_manager/tasks/tests/test_read.py:119
 #: task_manager/tasks/tests/test_update.py:17
 #: task_manager/tasks/tests/test_update.py:20
 msgid "You are not logged in! Please log in."
 msgstr "Вы не вошли в систему! Пожалуйста, войдите в систему."
 
-#: task_manager/labels/tests.py:62 task_manager/labels/views.py:20
+#: task_manager/labels/tests.py:69 task_manager/labels/views.py:19
 msgid "Label successfully created."
 msgstr "Метка успешно создана."
 
-#: task_manager/labels/tests.py:115 task_manager/labels/views.py:39
+#: task_manager/labels/tests.py:132 task_manager/labels/views.py:38
 msgid "Label has been successfully changed."
 msgstr "Метка была успешно изменена."
 
-#: task_manager/labels/tests.py:143 task_manager/labels/views.py:53
+#: task_manager/labels/tests.py:172 task_manager/labels/views.py:56
 msgid "You can't delete a label because it's associated with tasks."
 msgstr "Вы не можете удалить метку, потому что она связана с задачами."
 
-#: task_manager/labels/tests.py:155 task_manager/labels/views.py:50
+#: task_manager/labels/tests.py:185 task_manager/labels/views.py:53
 msgid "The label has been successfully removed."
 msgstr "Метка была успешно создана."
 
-#: task_manager/mixins.py:37 task_manager/users/tests.py:166
-#: task_manager/users/tests.py:173
+#: task_manager/mixins.py:40 task_manager/users/tests.py:192
+#: task_manager/users/tests.py:201
 msgid "You do not have permissions to delete another user."
 msgstr "У вас нет прав для удаления другого пользователя."
 
-#: task_manager/mixins.py:65
+#: task_manager/mixins.py:69
 msgid "Error message for deleting a linked entity."
 msgstr "Сообщение об ошибке удаления связанной сущности."
 
-#: task_manager/statuses/tests.py:43 task_manager/statuses/views.py:26
+#: task_manager/statuses/tests.py:50 task_manager/statuses/views.py:20
 msgid "Status successfully created."
 msgstr "Статус успешно создан."
 
-#: task_manager/statuses/tests.py:107 task_manager/statuses/views.py:45
+#: task_manager/statuses/tests.py:125 task_manager/statuses/views.py:39
 msgid "Status has been successfully changed."
 msgstr "Статус был успешно изменен."
 
-#: task_manager/statuses/tests.py:147 task_manager/statuses/views.py:58
+#: task_manager/statuses/tests.py:173 task_manager/statuses/views.py:57
 msgid "You can't delete a status because it's associated with tasks."
 msgstr "Вы не можете удалить статус, потому что он связан с задачами."
 
-#: task_manager/statuses/tests.py:159 task_manager/statuses/views.py:56
+#: task_manager/statuses/views.py:55
 msgid "Status has been successfully deleted."
 msgstr "Статус успешно удален."
 
-#: task_manager/tasks/filters.py:11
+#: task_manager/tasks/filters.py:12
 msgid "Only your tasks"
 msgstr "Только свои задачи"
 
@@ -102,79 +99,76 @@ msgstr "Зажмите CTRL для выбора нескольких меток.
 msgid "description"
 msgstr "Описание"
 
-#: task_manager/tasks/models.py:15
+#: task_manager/tasks/models.py:18
 msgid "statuses"
 msgstr "Статусы"
 
-#: task_manager/tasks/models.py:16
+#: task_manager/tasks/models.py:22
 msgid "executor"
 msgstr "Исполнитель"
 
-#: task_manager/tasks/models.py:17
+#: task_manager/tasks/models.py:29
 msgid "author"
 msgstr "Автор"
 
-#: task_manager/tasks/models.py:17
+#: task_manager/tasks/models.py:30
 msgid "user_tasks"
 msgstr "Задачи"
 
-#: task_manager/tasks/models.py:18
+#: task_manager/tasks/models.py:35
 msgid "labels"
 msgstr "Метки"
 
-#: task_manager/tasks/models.py:31
+#: task_manager/tasks/models.py:50
 msgid "task"
 msgstr "Задача"
 
-#: task_manager/tasks/models.py:32
+#: task_manager/tasks/models.py:51
 msgid "label"
 msgstr "Метка"
 
-#: task_manager/tasks/tests.py:99 task_manager/tasks/tests/test_create.py:34
-#: task_manager/tasks/views.py:78
+#: task_manager/tasks/tests/test_create.py:39 task_manager/tasks/views.py:40
 msgid "The task has been successfully created."
 msgstr "Задача была успешно создана."
 
-#: task_manager/tasks/tests.py:163 task_manager/tasks/tests/test_update.py:34
-#: task_manager/tasks/views.py:95
-msgid "The task has been successfully updated."
-msgstr "Задача была успешно обновлена."
-
-#: task_manager/tasks/tests.py:192 task_manager/tasks/tests/test_delete.py:35
-#: task_manager/tasks/views.py:107
+#: task_manager/tasks/tests/test_delete.py:35 task_manager/tasks/views.py:69
 msgid "The task has been successfully deleted."
 msgstr "Задача была успешно удалена."
 
-#: task_manager/tasks/views.py:109
+#: task_manager/tasks/tests/test_update.py:36 task_manager/tasks/views.py:57
+msgid "The task has been successfully updated."
+msgstr "Задача была успешно обновлена."
+
+#: task_manager/tasks/views.py:71
 msgid "A task can only be deleted by its author."
 msgstr "Задача может быть удалена только его автором."
 
-#: task_manager/users/tests.py:33 task_manager/users/views.py:23
+#: task_manager/users/tests.py:33 task_manager/users/views.py:27
 msgid "You have been successfully signed in."
 msgstr "Вы успешно зарегистрированы."
 
-#: task_manager/users/tests.py:92 task_manager/users/tests.py:104
-#: task_manager/users/views.py:43
+#: task_manager/users/tests.py:103 task_manager/users/tests.py:117
+#: task_manager/users/views.py:51
 msgid "You don't have permissions to modify another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/tests.py:121 task_manager/users/views.py:42
+#: task_manager/users/tests.py:140 task_manager/users/views.py:50
 msgid "The user data has been successfully changed."
 msgstr "Данные пользователя были успешно изменены."
 
-#: task_manager/users/tests.py:183 task_manager/users/views.py:58
+#: task_manager/users/tests.py:214 task_manager/users/views.py:72
 msgid "You can't delete a user because they are associated with tasks."
 msgstr "Вы не можете удалить пользователя, потому что он связан с задачами."
 
-#: task_manager/users/tests.py:195 task_manager/users/views.py:57
+#: task_manager/users/tests.py:230 task_manager/users/views.py:71
 msgid "User successfully deleted."
 msgstr "Пользователь успешно удален"
 
-#: task_manager/views.py:24
+#: task_manager/views.py:23
 msgid "You have successfully logged in."
 msgstr "Вы успешно авторизовались."
 
-#: task_manager/views.py:42
+#: task_manager/views.py:31
 msgid "You've logged out of your account."
 msgstr "Вы вышли из аккаунта."
 
