@@ -43,7 +43,7 @@ class UserUpdateView(PleaseLoginMixin, OwnerTestMixin, SuccessMessageMixin, Upda
     """Класс-представление для редактирования отдельного пользователя."""
 
     model = User
-    fields = ['first_name', 'last_name', 'username',]
+    form_class = UserRegisterForm
     pk_url_kwarg = "user_id"
     success_url = reverse_lazy('all_users')
     template_name = "users/update.html"
