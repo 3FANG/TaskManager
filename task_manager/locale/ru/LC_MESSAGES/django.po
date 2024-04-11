@@ -166,7 +166,7 @@ msgstr "Пользователь успешно удален"
 
 #: task_manager/views.py:23
 msgid "You have successfully logged in."
-msgstr "Вы успешно авторизовались."
+msgstr "Вы залогинены."
 
 #: task_manager/views.py:31
 msgid "You've logged out of your account."
