@@ -97,10 +97,10 @@ class TestUpdateStatus(TestCase):
         }
         for request_url, redirect_url in routes.items():
             with self.subTest(
-                    "Ошибка перенаправления",
-                    redirect_url=redirect_url,
-                    request_url=request_url
-                    ):
+                "Ошибка перенаправления",
+                redirect_url=redirect_url,
+                request_url=request_url
+            ):
                 response = self.client.get(request_url, follow=True)
                 self.assertRedirects(response, expected_url=redirect_url)
                 self.assertContains(response, _("You are not logged in! Please log in."))
@@ -152,10 +152,10 @@ class TestDeleteStatus(TestCase):
         }
         for request_url, redirect_url in routes.items():
             with self.subTest(
-                    "Ошибка перенаправления",
-                    redirect_url=redirect_url,
-                    request_url=request_url
-                    ):
+                "Ошибка перенаправления",
+                redirect_url=redirect_url,
+                request_url=request_url
+            ):
                 response = self.client.get(request_url, follow=True)
                 self.assertRedirects(response, expected_url=redirect_url)
                 self.assertContains(response, _("You are not logged in! Please log in."))

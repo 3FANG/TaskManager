@@ -83,10 +83,10 @@ class TestUpdateUser(TestCase):
         }
         for request_url, redirect_url in redirect_routes.items():
             with self.subTest(
-                    "Ошибка перенаправления",
-                    redirect_url=redirect_url,
-                    request_url=request_url
-                    ):
+                "Ошибка перенаправления",
+                redirect_url=redirect_url,
+                request_url=request_url
+            ):
                 response = self.client.get(request_url)
                 self.assertRedirects(response, redirect_url)
 
@@ -172,10 +172,10 @@ class TestDeleteUser(TestCase):
         }
         for request_url, redirect_url in redirect_routes.items():
             with self.subTest(
-                    "Ошибка перенаправления",
-                    redirect_url=redirect_url,
-                    request_url=request_url
-                    ):
+                "Ошибка перенаправления",
+                redirect_url=redirect_url,
+                request_url=request_url
+            ):
                 response = self.client.get(request_url)
                 self.assertRedirects(response, redirect_url)
 
