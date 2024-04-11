@@ -100,8 +100,8 @@ msgid "description"
 msgstr "Описание"
 
 #: task_manager/tasks/models.py:18
-msgid "statuses"
-msgstr "Статусы"
+msgid "status"
+msgstr "Статус"
 
 #: task_manager/tasks/models.py:22
 msgid "executor"

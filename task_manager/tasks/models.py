@@ -15,7 +15,7 @@ class Tasks(models.Model):
     status = models.ForeignKey(
         Statuses,
         on_delete=models.PROTECT,
-        verbose_name=_("statuses")
+        verbose_name=_("status")
     )
     executor = models.ForeignKey(
         User, on_delete=models.PROTECT,
