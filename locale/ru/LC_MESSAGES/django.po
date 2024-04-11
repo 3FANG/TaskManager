@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-11 08:12+0300\n"
+"POT-Creation-Date: 2024-04-11 12:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -370,8 +370,8 @@ msgid "Registration"
 msgstr "Регистрация"
 
 #: templates/users/signup.html:12
-msgid "Sign up"
-msgstr "Регистрация"
+msgid "Register"
+msgstr "Зарегистрировать"
 
 #: templates/users/update.html:8
 msgid "Changing user information"

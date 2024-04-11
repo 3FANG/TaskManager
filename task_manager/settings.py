@@ -154,7 +154,7 @@ USE_I18N = True
 USE_TZ = True
 
 LOCALE_PATHS = [
-    BASE_DIR / 'task_manager' / 'locale'
+    BASE_DIR / 'locale'
 ]
 
 # Static files (CSS, JavaScript, Images)
