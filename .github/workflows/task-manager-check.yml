@@ -19,16 +19,23 @@ jobs:
       # Устанавливаем poetry
       - name: Install Poetry
         uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
       # Устанавливаем зависимости
-      - run: poetry install
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
       # Собираем файлы статики и загружаем миграции
       - name: Build project
         run: |
+          source .venv/bin/activate
           python3 manage.py collectstatic --no-input
           python3 manage.py migrate
       # Запускаем тестирование
       - name: Test coverage
         run: |
+          source .venv/bin/activate
           poetry run coverage run manage.py test
           poetry run coverage report -m --skip-covered
       # Проверка линтера
