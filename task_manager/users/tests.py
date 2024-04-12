@@ -131,6 +131,8 @@ class TestUpdateUser(TestCase):
                 'first_name': 'first_name',
                 'last_name': 'last_name',
                 'username': 'username',
+                'password1': 'K3GauRS1',
+                'password2': 'K3GauRS1',
             },
             follow=True
         )

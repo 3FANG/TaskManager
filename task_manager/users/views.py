@@ -7,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-from task_manager.users.forms import UserRegisterForm
+from task_manager.users.forms import UserRegisterForm, UserUpdateForm
 from task_manager.mixins import (
     OwnerTestMixin,
     PleaseLoginMixin,
@@ -43,7 +43,7 @@ class UserUpdateView(PleaseLoginMixin, OwnerTestMixin, SuccessMessageMixin, Upda
     """Класс-представление для редактирования отдельного пользователя."""
 
     model = User
-    form_class = UserRegisterForm
+    form_class = UserUpdateForm
     pk_url_kwarg = "user_id"
     success_url = reverse_lazy('all_users')
     template_name = "users/update.html"
