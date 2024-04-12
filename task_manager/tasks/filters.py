@@ -7,7 +7,10 @@ from task_manager.labels.models import Labels
 
 
 class TasksFilter(django_filters.FilterSet):
-    labels = django_filters.ModelChoiceFilter(queryset=Labels.objects.all(), label=_("Label"))
+    labels = django_filters.ModelChoiceFilter(
+        queryset=Labels.objects.all(),
+        label=_("Label")
+    )
     self_tasks = django_filters.BooleanFilter(
         label=_("Only your tasks"),
         method="get_user_tasks",

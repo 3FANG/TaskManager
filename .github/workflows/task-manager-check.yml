@@ -1,0 +1,36 @@
+name: task-manager-check
+
+on: 
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Клонируем репозиторий
+      - uses: actions/checkout@v3
+      # Ставим Python нужной версии
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+           python-version: 3.10.x
+      # Устанавливаем poetry
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+      # Устанавливаем зависимости
+      - run: poetry install
+      # Собираем файлы статики и загружаем миграции
+      - name: Build project
+        run: |
+          python3 manage.py collectstatic --no-input
+          python3 manage.py migrate
+      # Запускаем тестирование
+      - name: Test coverage
+        run: |
+          poetry run coverage run manage.py test
+          poetry run coverage report -m --skip-covered
+      # Проверка линтера
+      - name: Lint
+        run: poetry run flake8 task_manager
