@@ -34,6 +34,8 @@ jobs:
           python3 manage.py migrate
       # Запускаем тестирование
       - name: Test coverage
+        env: 
+          SECRET_KEY: "1234"
         run: |
           source .venv/bin/activate
           poetry run coverage run manage.py test
