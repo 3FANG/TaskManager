@@ -8,6 +8,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # Подключаем docker образ для postgresql
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: task_manager_action
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
       # Клонируем репозиторий
       - uses: actions/checkout@v3
@@ -36,6 +51,7 @@ jobs:
       - name: Test coverage
         env: 
           SECRET_KEY: "1234"
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/task_manager_action
         run: |
           source .venv/bin/activate
           poetry run coverage run manage.py test
