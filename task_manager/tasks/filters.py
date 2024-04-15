@@ -18,7 +18,7 @@ class TasksFilter(django_filters.FilterSet):
     )
 
     def get_user_tasks(self, queryset, name, value):
-        """Возвращает задачи только авторизованного пользователя."""
+        """Возвращает задачи только текущего авторизованного пользователя."""
         # Если не указано значение, возвращаем переданный queryset
         if not value:
             return queryset

@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
+from django.conf import settings
 
 from task_manager.statuses.models import Statuses
 from task_manager.labels.models import Labels
 
 
-User = get_user_model()
+# User = get_user_model()
 
 
 class Tasks(models.Model):
@@ -18,14 +19,14 @@ class Tasks(models.Model):
         verbose_name=_("status")
     )
     executor = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         verbose_name=_("executor"),
         null=True,
         blank=True
     )
     author = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         verbose_name=_("author"),
         related_name=_("user_tasks")
