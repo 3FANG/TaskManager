@@ -1,9 +1,28 @@
-# Менеджер задач:
+# Менеджер задач
 [![Actions Status](https://github.com/3FANG/python-django-developer-project-52/actions/workflows/task-manager-check.yml/badge.svg)](https://github.com/3FANG/python-django-developer-project-52/actions)[![Maintainability](https://api.codeclimate.com/v1/badges/476a969f4e489a4446bd/maintainability)](https://codeclimate.com/github/3FANG/python-django-developer-project-52/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/476a969f4e489a4446bd/test_coverage)](https://codeclimate.com/github/3FANG/python-django-developer-project-52/test_coverage)
 
-https://task-manager-poject.onrender.com
+https://task-manager-poject.onrender.com _(стоит перейти на Railway)_
 
-## Демонстрация
+## Зависимости
+Python ^3.10  
+Poetry ^1.4  
+PostgreSQL ^16
+
+## Установка
+1. Склонировать репозиторий:
+ ```bash
+ git clone https://github.com/3FANG/python-django-developer-project-52.git
+ ```
+2. В корень проекта добавить файл ```.env``` Список переменных - ```.env_EXAMPLE```
+
+3. В директории проекта выполнить:
+ ```bash
+ make build 
+```
+## Запуск приложения
+Используйте ```make start``` для запуска приложения. После запуска оно будет доступно по адресу http://127.0.0.1:8000
+
+## Демонстрация проекта
 
 - ### Главная странца
 
