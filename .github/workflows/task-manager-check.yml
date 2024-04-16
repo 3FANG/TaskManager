@@ -47,16 +47,7 @@ jobs:
           source .venv/bin/activate
           python3 manage.py collectstatic --no-input
           python3 manage.py migrate
-      # Запускаем тестирование
-      # - name: Test coverage
-      #   env: 
-      #     SECRET_KEY: "1234"
-      #     DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/task_manager_action
-      #   run: |
-      #     source .venv/bin/activate
-      #     poetry run coverage run manage.py test
-      #     poetry run coverage report -m --skip-covered
-
+      # Запускаем тестирование и покрытие кода тестами
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v5
         env:
@@ -65,7 +56,6 @@ jobs:
             CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
-          debug: true
 
       # Проверка линтера
       - name: Lint

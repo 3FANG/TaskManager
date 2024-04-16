@@ -1,0 +1,3 @@
+DEBUG=False
+DATABASE_URL=postgres://username:password@hostname/database
+SECRET_KEY="Your secret key"
