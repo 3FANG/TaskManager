@@ -9,7 +9,7 @@
     <a href="{% url 'create_task' %}" class="btn btn-primary mb-3" role="button">{% translate 'Create task' %}</a>
 
     <div class="card mb-3">
-        <div class="card-body bg-light">
+        <div class="card-body bg-body-tertiary">
            <form method="get">
                 {% bootstrap_form filter.form %}
                 <button type="submit" class="btn btn-primary">{% translate 'Show' %}</button>
@@ -17,7 +17,6 @@
         </div>
     </div>
     
-
     <table class="table table-striped">
         <thead>
             <tr>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-11 14:54+0300\n"
+"POT-Creation-Date: 2024-04-16 09:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: task_manager/labels/models.py:6 task_manager/statuses/models.py:7
-#: task_manager/tasks/models.py:13
+#: task_manager/tasks/models.py:14
 msgid "name"
 msgstr "Имя"
 
 #: task_manager/labels/models.py:7 task_manager/statuses/models.py:8
-#: task_manager/tasks/models.py:38
+#: task_manager/tasks/models.py:40
 msgid "date created"
 msgstr "Дата создания"
 
@@ -62,8 +62,8 @@ msgstr "Невозможно удалить метку, потому что он
 msgid "The label has been successfully removed."
 msgstr "Метка успешно удалена."
 
-#: task_manager/mixins.py:40 task_manager/users/tests.py:192
-#: task_manager/users/tests.py:201
+#: task_manager/mixins.py:40 task_manager/users/tests.py:194
+#: task_manager/users/tests.py:203
 msgid "You do not have permissions to delete another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
@@ -87,11 +87,11 @@ msgstr "Невозможно удалить статус, потому что о
 msgid "Status has been successfully deleted."
 msgstr "Статус успешно удален."
 
-#: task_manager/tasks/filters.py:10
+#: task_manager/tasks/filters.py:12
 msgid "Label"
 msgstr "Метка"
 
-#: task_manager/tasks/filters.py:12
+#: task_manager/tasks/filters.py:15
 msgid "Only your tasks"
 msgstr "Только свои задачи"
 
@@ -99,35 +99,35 @@ msgstr "Только свои задачи"
 msgid "Press CTRL to select multiple labels."
 msgstr "Зажмите CTRL для выбора нескольких меток."
 
-#: task_manager/tasks/models.py:14
+#: task_manager/tasks/models.py:15
 msgid "description"
 msgstr "Описание"
 
-#: task_manager/tasks/models.py:18
+#: task_manager/tasks/models.py:19
 msgid "status"
 msgstr "Статус"
 
-#: task_manager/tasks/models.py:22
+#: task_manager/tasks/models.py:24
 msgid "executor"
 msgstr "Исполнитель"
 
-#: task_manager/tasks/models.py:29
+#: task_manager/tasks/models.py:31
 msgid "author"
 msgstr "Автор"
 
-#: task_manager/tasks/models.py:30
+#: task_manager/tasks/models.py:32
 msgid "user_tasks"
 msgstr "Задачи"
 
-#: task_manager/tasks/models.py:35
+#: task_manager/tasks/models.py:37
 msgid "labels"
 msgstr "Метки"
 
-#: task_manager/tasks/models.py:50
+#: task_manager/tasks/models.py:52
 msgid "task"
 msgstr "Задача"
 
-#: task_manager/tasks/models.py:51
+#: task_manager/tasks/models.py:53
 msgid "label"
 msgstr "Метка"
 
@@ -147,6 +147,18 @@ msgstr "Задача успешно изменена."
 msgid "A task can only be deleted by its author."
 msgstr "Задачу может удалить только ее автор."
 
+#: task_manager/users/forms.py:29
+msgid "Password"
+msgstr ""
+
+#: task_manager/users/forms.py:35
+msgid "Password confirmation"
+msgstr ""
+
+#: task_manager/users/forms.py:38
+msgid "Enter the same password as before, for verification."
+msgstr ""
+
 #: task_manager/users/tests.py:33
 msgid "You have been successfully signed in."
 msgstr "Пользователь успешно зарегистрирован."
@@ -156,15 +168,15 @@ msgstr "Пользователь успешно зарегистрирован."
 msgid "You don't have permissions to modify another user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/tests.py:140 task_manager/users/views.py:50
+#: task_manager/users/tests.py:142 task_manager/users/views.py:50
 msgid "The user data has been successfully changed."
 msgstr "Пользователь успешно изменен."
 
-#: task_manager/users/tests.py:214 task_manager/users/views.py:72
+#: task_manager/users/tests.py:216 task_manager/users/views.py:72
 msgid "You can't delete a user because they are associated with tasks."
 msgstr "Невозможно удалить пользователя, потому что он используется."
 
-#: task_manager/users/tests.py:230 task_manager/users/views.py:71
+#: task_manager/users/tests.py:232 task_manager/users/views.py:71
 msgid "User successfully deleted."
 msgstr "Пользователь успешно удален"
 
@@ -180,49 +192,48 @@ msgstr "Вы залогинены."
 msgid "You've logged out of your account."
 msgstr "Вы разлогинены."
 
-#: templates/base.html:13 templates/base.html:26
+#: templates/base.html:13 templates/base.html:28
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
-#: templates/base.html:34 templates/users/index.html:8
+#: templates/base.html:36 templates/users/index.html:8
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/base.html:38 templates/statuses/index.html:8
+#: templates/base.html:40 templates/statuses/index.html:8
 msgid "Statuses"
 msgstr "Статусы"
 
-#: templates/base.html:41 templates/tasks/index.html:8
+#: templates/base.html:43 templates/tasks/index.html:8
 msgid "Tasks"
 msgstr "Задачи"
 
-#: templates/base.html:44 templates/labels/index.html:8
+#: templates/base.html:46 templates/labels/index.html:8
+#: templates/tasks/show.html:33
 msgid "Labels"
 msgstr "Метки"
 
-#: templates/base.html:52 templates/logout.html:9
+#: templates/base.html:54 templates/logout.html:9
 msgid "Logout"
 msgstr "Выход"
 
-#: templates/base.html:55 templates/login.html:9
+#: templates/base.html:57 templates/login.html:9
 msgid "Login"
 msgstr "Вход"
 
-#: templates/base.html:56
+#: templates/base.html:58
 msgid "Sign-up"
 msgstr "Регистрация"
 
-#: templates/base.html:69
-msgid "Hello from Hexlet!"
-msgstr "Привет от Хекслета!"
-
-#: templates/base.html:70
-msgid "Practical programming courses"
-msgstr "Практические курсы по программированию"
+#: templates/base.html:71
+msgid "Welcome!"
+msgstr "Добро пожаловать!"
 
 #: templates/base.html:72
-msgid "Learn more"
-msgstr "Узнать больше"
+msgid ""
+"This is the best task manager in the world. Just give it a try! The "
+"interface is absolutely intuitive."
+msgstr "Это лучший менеджер задач в мире. Просто попробуйте! Интерфейс абсолютно интуитивно понятен."
 
 #: templates/labels/create.html:8 templates/labels/index.html:9
 msgid "Create label"
@@ -380,3 +391,12 @@ msgstr "Зарегистрировать"
 #: templates/users/update.html:8
 msgid "Changing user information"
 msgstr "Изменение пользователя"
+
+#~ msgid "Hello from Hexlet!"
+#~ msgstr "Привет от Хекслета!"
+
+#~ msgid "Practical programming courses"
+#~ msgstr "Практические курсы по программированию"
+
+#~ msgid "Learn more"
+#~ msgstr "Узнать больше"
