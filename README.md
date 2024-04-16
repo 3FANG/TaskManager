@@ -1,5 +1,5 @@
 # Менеджер задач:
-[![Actions Status](https://github.com/3FANG/python-django-developer-project-52/actions/workflows/task-manager-check.yml/badge.svg)](https://github.com/3FANG/python-django-developer-project-52/actions)
+[![Actions Status](https://github.com/3FANG/python-django-developer-project-52/actions/workflows/task-manager-check.yml/badge.svg)](https://github.com/3FANG/python-django-developer-project-52/actions)[![Maintainability](https://api.codeclimate.com/v1/badges/476a969f4e489a4446bd/maintainability)](https://codeclimate.com/github/3FANG/python-django-developer-project-52/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/476a969f4e489a4446bd/test_coverage)](https://codeclimate.com/github/3FANG/python-django-developer-project-52/test_coverage)
 
 https://task-manager-poject.onrender.com
 

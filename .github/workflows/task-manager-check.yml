@@ -48,14 +48,27 @@ jobs:
           python3 manage.py collectstatic --no-input
           python3 manage.py migrate
       # Запускаем тестирование
-      - name: Test coverage
-        env: 
-          SECRET_KEY: "1234"
-          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/task_manager_action
-        run: |
-          source .venv/bin/activate
-          poetry run coverage run manage.py test
-          poetry run coverage report -m --skip-covered
+      # - name: Test coverage
+      #   env: 
+      #     SECRET_KEY: "1234"
+      #     DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/task_manager_action
+      #   run: |
+      #     source .venv/bin/activate
+      #     poetry run coverage run manage.py test
+      #     poetry run coverage report -m --skip-covered
+
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v5
+        env:
+            SECRET_KEY: "1234"
+            DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/task_manager_action
+            CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: |
+            poetry run coverage run manage.py test task_manager
+            poetry run coverage xml
+          debug: true
+
       # Проверка линтера
       - name: Lint
         run: poetry run flake8 task_manager
