@@ -64,9 +64,7 @@ jobs:
             DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/task_manager_action
             CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: |
-            poetry run coverage run manage.py test task_manager
-            poetry run coverage xml
+          coverageCommand: make test-coverage
           debug: true
 
       # Проверка линтера
